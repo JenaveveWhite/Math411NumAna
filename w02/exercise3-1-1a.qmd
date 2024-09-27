@@ -1,6 +1,6 @@
 ---
 title: "Exercise 3.1.1a (C3-P1)"
-subtitle: "Math411"
+subtitle: "MATH411"
 author: "Nathan Lunceford"
 format:
   html:
@@ -29,8 +29,6 @@ format:
 import numpy as np
 import matplotlib.pyplot as plt
 ```
-
-# Exercise 3.1.1a (C3-P1)
 
 ## Use Lagrange interpolation to find a polynomial that passes through the points $(0, 1), (2, 3), (3, 0)$.
 
