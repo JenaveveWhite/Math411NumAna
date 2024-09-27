@@ -23,6 +23,7 @@ format:
 ---
 
 ## Week 1  
+- [Fixed-Point Iteration](./w01/fixed-point-iteration.html)
 
 ## Week 2
 - [Lagrange Interpolation](./w02/lagrange-interpolation.html)
