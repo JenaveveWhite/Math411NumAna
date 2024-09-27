@@ -23,7 +23,10 @@ format:
 ---
 
 ## Week 1  
+- [Bisection Method](./w01/bisection-method.html)
 - [Fixed-Point Iteration](./w01/fixed-point-iteration.html)
+- [Newtons's Method](./w01/newtons-method.html)
+- [Secant Method](./w01/secant-method.html)
 
 ## Week 2
 - [Lagrange Interpolation](./w02/lagrange-interpolation.html)
