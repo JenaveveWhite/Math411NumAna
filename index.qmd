@@ -22,7 +22,8 @@ format:
     
 ---
 
-[Suggested Homework](./math411-suggested-homework.html)
+[Suggested Homework](./math411-suggested-homework.html)  
+[Notes](./notes/index.html)
 
 
 ## Week 1  
