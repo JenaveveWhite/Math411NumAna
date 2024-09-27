@@ -23,9 +23,10 @@ format:
 ---
 
 
-## Week 1
+## Week 1  
 
-- [Exercise 3.1.1a](./w02/exercise3-1-1a.html)
 
 ## Week 2
 
+- [Exercise 3.1.1a](./w02/exercise3-1-1a.html)
+- [Exercise 3.1.1c](./w02/exercise3-1-1c.html)

@@ -30,7 +30,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 ```
 
-## Use Lagrange interpolation to find a polynomial that passes through the points $(0, 1), (2, 3), (3, 0)$.
+## Question
+
+**Use Lagrange interpolation to find a polynomial that passes through the points $(0, 1), (2, 3), (3, 0)$.**
 
 The Lagrange interpolation polynomial for three points $(x_1, y_1), (x_2, y_2),$ and $(x_3, y_3)$ is given by the formula:
 
