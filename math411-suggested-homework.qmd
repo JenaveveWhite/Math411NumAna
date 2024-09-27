@@ -66,11 +66,11 @@ f.  Write code to plot the function $h(x) = e^{x} \cos^2 x - 2$ on the interval 
 **(C1-P8)** Exercise 1.4.8  
 **(C1-P9)** Computer Problem 1.4.7  
 **(C1-P10)** Exercise 1.5.1  
-**(C1-P11)** Use Python to compare results obtained using the Bisection Method, Newton’s Method, and the Secant Method to solve the equation $ \ln x + x^2 = 3 $. Note that Python code for these methods is available on I-Learn.
+**(C1-P11)** Use Python to compare results obtained using the Bisection Method, Newton’s Method, and the Secant Method to solve the equation $\ln x + x^2 = 3$. Note that Python code for these methods is available on I-Learn.
    
    a. Solve the problem using each of the three methods. Report starting values and the number of iterations required to obtain 6 correct decimal places of accuracy. **Hint**: a graph of the function may help with starting values.
    
-   b. On the same axes, plot $ \log(\epsilon_{i+1}) $ vs. $ \log(\epsilon_i) $ for the three methods. Explain your plot. How is it related to the rate or order of convergence? Use the errors to determine if your results are consistent with theory. How would you compute the error if you didn’t have an exact value for the root?
+   b. On the same axes, plot $\log(\epsilon_{i+1})$ vs. $\log(\epsilon_i)$ for the three methods. Explain your plot. How is it related to the rate or order of convergence? Use the errors to determine if your results are consistent with theory. How would you compute the error if you didn’t have an exact value for the root?
 
 **(C3-P1)** Exercise 3.1.1ac  
 **(C3-P2)** Exercise 3.1.2ac  
@@ -186,5 +186,5 @@ Attempt the first several Week 12 problems before Monday Week 12
 ---
 
 **(C10-P8)** Computer Problem 10.3.2cd  
-**(C10-P9)** Exercise 10.3.5 (Complete the \( \sum_{j=0}^{n-1} \cos \frac{2 \pi j k}{n} \cos \frac{2 \pi j l}{n} \) result only)  
+**(C10-P9)** Exercise 10.3.5 (Complete the $\sum_{j=0}^{n-1} \cos \frac{2 \pi j k}{n} \cos \frac{2 \pi j l}{n}$ result only)  
 **(C10-P10)** Exercise 10.1.6  
