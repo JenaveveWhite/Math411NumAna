@@ -30,6 +30,7 @@ format:
 
 ## Week 2
 - [Lagrange Interpolation](./w02/lagrange-interpolation.html)
+- [Newton’s Divided Differences](./w02/newtons-divided-differences.html)
 
 ## Week 3
 
