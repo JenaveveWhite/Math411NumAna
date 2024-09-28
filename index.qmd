@@ -44,7 +44,8 @@ format:
 - [(C1-P11)](#)
 - [(C3-P1) Exercise 3.1.1a](./w02/exercise3-1-1a.html)
 - [(C3-P1) Exercise 3.1.1c](./w02/exercise3-1-1c.html)
-- [(C3-P2) Exercise 3.1.1a](./w02/exercise3-1-2a.html)
+- [(C3-P2) Exercise 3.1.2a](./w02/exercise3-1-2a.html)
+- [(C3-P2) Exercise 3.1.2b](./w02/exercise3-1-2b.html)
 - [(C3-P3) Exercise 3.1.6](#)
 
 ## Week 3
