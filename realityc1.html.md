@@ -23,9 +23,9 @@ A Stewart platform is a versatile parallel manipulator characterized by six degr
 
 # Question 1 and 2
 
-Write a Python function for f(θ). The parameters $L_1, L_2, L_3, \gamma, x_1, x_2, y_2 \text{ are fixed} $ constants, and the strut lengths p1, p2, p3 will be known for a given pose.
+Write a Python function for f(θ). The parameters $L_1, L_2, L_3, \gamma, x_1, x_2, y_2 \text{ are fixed}$ constants, and the strut lengths p1, p2, p3 will be known for a given pose.
 
-::: {#b8234fd6 .cell execution_count=1}
+::: {#c25e8604 .cell execution_count=1}
 ``` {.python .cell-code}
 import matplotlib.pyplot as plt
 import numpy as np
@@ -88,7 +88,7 @@ plt.show()
 
 Reproduce Figure 1.15.
 
-::: {#47c4b96e .cell execution_count=2}
+::: {#83be5bac .cell execution_count=2}
 ``` {.python .cell-code}
 def plot_triangle(point1, point2, point3, x1, x2 , y2):
     
@@ -144,7 +144,7 @@ plot_triangle((2,1),(1,2),(3,2), 4,4,0)
 
 Solve the forward kinematics problem for the planar Stewart platform specified by x1 = 5,(x2, y2) = (0, 6), L1 = L3 = 3, L2 = 3√2, γ = π/4, p1 = p2 = 5, p3 = 3. Begin by plotting f(θ). Use an equation solver of your choice to find all four poses (roots of   f(θ)), and plot them. Check your answers by verifying that p1, p2, p3 are the lengths of the struts in your plot.
 
-::: {#e65f3ee6 .cell execution_count=3}
+::: {#6cba85ca .cell execution_count=3}
 ``` {.python .cell-code}
 from scipy.optimize import fsolve
 import numpy as np
@@ -218,16 +218,15 @@ array([-4.08036267, -0.95420323, -0.24600057,  1.09426087,  2.20282264])
 :::
 
 
-::: {#878f1747 .cell execution_count=4}
+::: {#3f105b40 .cell execution_count=4}
 ``` {.python .cell-code}
 import numpy as np 
 import matplotlib.pyplot as plt 
 
-
 L1 = 3
 L2 = 3 * np.sqrt(2)
 L3 = 3
-gamma = np.pi /4
+gamma = np.pi / 4
 x1 = 5 
 x2 = 0
 y2 = 6
@@ -266,6 +265,9 @@ def triangleplotting(theta):
     m1 = N2/D
     m2 = y + L3 * np.sin(theta)
     m3 = y + L2 * np.sin(gamma + theta)
+
+    plt.grid()
+    plt.autoscale()
     #plots the inner triangle.
     plt.plot([x,u3, x + L3 * np.cos(theta),x ],[y, y + L2 * np.sin(gamma + theta), y + L3 * np.sin(theta),y ])
     
@@ -293,27 +295,24 @@ def secant(f, x0, x1, k):
 plt.figure()
 firsttheta = secant(f, -1, -0.7, 10)
 triangleplotting(firsttheta)
+#print(firsttheta)
 
 plt.figure()
-secondtheta = secant(f, -.4, -.3, 10)
+secondtheta = secant(f, -.4, -.3, 5)
+#print(secondtheta)
 triangleplotting(secondtheta)
-
+#
 plt.figure()
-thirdtheta = secant(f, 1, 1.2, 10)
+thirdtheta = secant(f, 1, 1.2, 5)
 triangleplotting(thirdtheta)
-
+#
 plt.figure()
-fourththeta = secant(f, 2, 2.2, 10)
+fourththeta = secant(f, 2, 2.2, 5)
 triangleplotting(fourththeta)
 ```
 
-::: {.cell-output .cell-output-stderr}
-```
-C:\Users\Jenaveve\AppData\Local\Temp\ipykernel_12124\3250899786.py:65: RuntimeWarning:
-
-invalid value encountered in scalar divide
-
-```
+::: {.cell-output .cell-output-display}
+![](realityc1_files/figure-html/cell-5-output-1.png){width=558 height=411}
 :::
 
 ::: {.cell-output .cell-output-display}
@@ -327,17 +326,13 @@ invalid value encountered in scalar divide
 ::: {.cell-output .cell-output-display}
 ![](realityc1_files/figure-html/cell-5-output-4.png){width=558 height=411}
 :::
-
-::: {.cell-output .cell-output-display}
-![](realityc1_files/figure-html/cell-5-output-5.png){width=558 height=411}
-:::
 :::
 
 
 # Question 5 
 Change strut length to p2 = 7 and re-solve the problem. For these parameters, there are six poses
 
-::: {#c91f4198 .cell execution_count=5}
+::: {#80920f15 .cell execution_count=5}
 ``` {.python .cell-code}
 p2 = 7
 
@@ -346,7 +341,25 @@ plt.plot(x_array, f(x_array))
 plt.grid()
 plt.show()
 
-rootfinder(-np.pi, np.pi, 6)
+g1 = secant(f,-.7, -.6, 3)
+g2 = secant(f,-.4, -.3, 3)
+g3 = secant(f,0, .1, 3)
+g4 = secant(f,.2, .5, 3)
+g5 = secant(f,.9, 1.1, 3)
+g6 = secant(f,2.3, 2.6, 3)
+
+plt.figure()
+triangleplotting(g1)
+plt.figure()
+triangleplotting(g2)
+plt.figure()
+triangleplotting(g3)
+plt.figure()
+triangleplotting(g4)
+plt.figure()
+triangleplotting(g5)
+plt.figure()
+triangleplotting(g6)
 
 ```
 
@@ -354,17 +367,28 @@ rootfinder(-np.pi, np.pi, 6)
 ![](realityc1_files/figure-html/cell-6-output-1.png){width=603 height=411}
 :::
 
-::: {.cell-output .cell-output-stdout}
-```
-Roots found: [-3.76002328  0.02609624  0.02609624  0.46848899  0.97538787  2.52316202]
-```
+::: {.cell-output .cell-output-display}
+![](realityc1_files/figure-html/cell-6-output-2.png){width=558 height=411}
 :::
 
-::: {.cell-output .cell-output-display execution_count=5}
-```
-array([-3.76002328,  0.02609624,  0.02609624,  0.46848899,  0.97538787,
-        2.52316202])
-```
+::: {.cell-output .cell-output-display}
+![](realityc1_files/figure-html/cell-6-output-3.png){width=558 height=411}
+:::
+
+::: {.cell-output .cell-output-display}
+![](realityc1_files/figure-html/cell-6-output-4.png){width=558 height=411}
+:::
+
+::: {.cell-output .cell-output-display}
+![](realityc1_files/figure-html/cell-6-output-5.png){width=558 height=411}
+:::
+
+::: {.cell-output .cell-output-display}
+![](realityc1_files/figure-html/cell-6-output-6.png){width=558 height=411}
+:::
+
+::: {.cell-output .cell-output-display}
+![](realityc1_files/figure-html/cell-6-output-7.png){width=558 height=411}
 :::
 :::
 
@@ -372,7 +396,7 @@ array([-3.76002328,  0.02609624,  0.02609624,  0.46848899,  0.97538787,
 # Question 6 
 Find a strut length p2, with the rest of the parameters as in Step 4, for which there are only two poses.
 
-::: {#fb9235f7 .cell execution_count=6}
+::: {#c3c76db6 .cell execution_count=6}
 ``` {.python .cell-code}
 p2 = 0
 
