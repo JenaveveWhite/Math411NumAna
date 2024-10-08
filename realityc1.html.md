@@ -25,9 +25,8 @@ A Stewart platform is a versatile parallel manipulator characterized by six degr
 Write a Python function for f(θ). The parameters L1, L2, L3, γ, x1, x2, y2 are fixed
 constants, and the strut lengths p1, p2, p3 will be known for a given pose.
 
-```{python, python.reticulate = FALSE}
-
-
+::: {#87cec6a4 .cell execution_count=1}
+``` {.python .cell-code}
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -77,15 +76,20 @@ plt.show()
 #    answ = [x,y, theta]
 #    return answ
 #
-
 ```
+
+::: {.cell-output .cell-output-display}
+![](realityc1_files/figure-html/cell-2-output-1.png){width=592 height=411}
+:::
+:::
+
 
 # Question 3
 
 Reproduce Figure 1.15.
 
-```{python, python.reticulate = FALSE}
-
+::: {#a92d8e50 .cell execution_count=2}
+``` {.python .cell-code}
 def plot_triangle(point1, point2, point3, x1, x2 , y2):
     
     
@@ -124,16 +128,24 @@ def plot_triangle(point1, point2, point3, x1, x2 , y2):
     
 plot_triangle((1,2),(2,3),(2,1), 4,4,0)
 plot_triangle((2,1),(1,2),(3,2), 4,4,0)
-
 ```
+
+::: {.cell-output .cell-output-display}
+![](realityc1_files/figure-html/cell-3-output-1.png){width=571 height=411}
+:::
+
+::: {.cell-output .cell-output-display}
+![](realityc1_files/figure-html/cell-3-output-2.png){width=571 height=411}
+:::
+:::
 
 
 # Question 4 
 
 Solve the forward kinematics problem for the planar Stewart platform specified by x1 = 5,(x2, y2) = (0, 6), L1 = L3 = 3, L2 = 3√2, γ = π/4, p1 = p2 = 5, p3 = 3. Begin by plotting f(θ). Use an equation solver of your choice to find all four poses (roots of   f(θ)), and plot them. Check your answers by verifying that p1, p2, p3 are the lengths of the struts in your plot.
 
-```{python, python.reticulate = FALSE }
-
+::: {#54b23698 .cell execution_count=3}
+``` {.python .cell-code}
 from scipy.optimize import fsolve
 import numpy as np
 import matplotlib.pyplot as plt
@@ -186,16 +198,31 @@ def rootfinder(start, stop, num):
 # Print the roots
 rootfinder(-np.pi, np.pi, 5)
 
-
 ```
 
+::: {.cell-output .cell-output-display}
+![](realityc1_files/figure-html/cell-4-output-1.png){width=600 height=411}
+:::
+
+::: {.cell-output .cell-output-stdout}
+```
+Roots found: [-4.08036267 -0.95420323 -0.24600057  1.09426087  2.20282264]
+```
+:::
+
+::: {.cell-output .cell-output-display execution_count=3}
+```
+array([-4.08036267, -0.95420323, -0.24600057,  1.09426087,  2.20282264])
+```
+:::
+:::
 
 
 # Question 5 
 Change strut length to p2 = 7 and re-solve the problem. For these parameters, there are six poses
 
-```{python}
-
+::: {#a7d2c65f .cell execution_count=4}
+``` {.python .cell-code}
 p2 = 7
 
 x_array = np.linspace(-np.pi, np.pi,400)
@@ -205,14 +232,32 @@ plt.show()
 
 rootfinder(-np.pi, np.pi, 6)
 
-
-
 ```
+
+::: {.cell-output .cell-output-display}
+![](realityc1_files/figure-html/cell-5-output-1.png){width=603 height=411}
+:::
+
+::: {.cell-output .cell-output-stdout}
+```
+Roots found: [-3.76002328  0.02609624  0.02609624  0.46848899  0.97538787  2.52316202]
+```
+:::
+
+::: {.cell-output .cell-output-display execution_count=4}
+```
+array([-3.76002328,  0.02609624,  0.02609624,  0.46848899,  0.97538787,
+        2.52316202])
+```
+:::
+:::
+
 
 # Question 6 
 Find a strut length p2, with the rest of the parameters as in Step 4, for which there are only two poses.
 
-```{python}
+::: {#8ba9354d .cell execution_count=5}
+``` {.python .cell-code}
 p2 = 0
 
 x_array = np.linspace(-np.pi, np.pi,500)
@@ -222,14 +267,43 @@ plt.show()
 
 rootfinder(-np.pi, np.pi, 10)
 
+```
+
+::: {.cell-output .cell-output-display}
+![](realityc1_files/figure-html/cell-6-output-1.png){width=600 height=411}
+:::
+
+::: {.cell-output .cell-output-stdout}
+```
+Roots found: [-4.97821343  1.30490762  1.30490024  1.30576139  1.30541648  1.30200921
+  1.30491879  1.30476176  1.30480726  1.30497186]
+```
+:::
+
+::: {.cell-output .cell-output-stderr}
+```
+C:\Users\Jenaveve\AppData\Local\Programs\Python\Python311\Lib\site-packages\scipy\optimize\_minpack_py.py:177: RuntimeWarning:
+
+The iteration is not making good progress, as measured by the 
+  improvement from the last ten iterations.
+
+C:\Users\Jenaveve\AppData\Local\Programs\Python\Python311\Lib\site-packages\scipy\optimize\_minpack_py.py:177: RuntimeWarning:
+
+The iteration is not making good progress, as measured by the 
+  improvement from the last five Jacobian evaluations.
 
 ```
+:::
+
+::: {.cell-output .cell-output-display execution_count=5}
+```
+array([-4.97821343,  1.30490762,  1.30490024,  1.30576139,  1.30541648,
+        1.30200921,  1.30491879,  1.30476176,  1.30480726,  1.30497186])
+```
+:::
+:::
+
 
 # Question 7 
 Calculate the intervals in p2, with the rest of the parameters as in Step 4, for which there are 0, 2, 4, and 6 poses, respectively
 
-```{python}
-
-
-
-```
