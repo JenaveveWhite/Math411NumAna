@@ -25,7 +25,7 @@ A Stewart platform is a versatile parallel manipulator characterized by six degr
 
 Write a Python function for f(θ). The parameters $L_1, L_2, L_3, \gamma, x_1, x_2, y_2 \text{ are fixed}$ constants, and the strut lengths p1, p2, p3 will be known for a given pose.
 
-::: {#c25e8604 .cell execution_count=1}
+::: {#1caa0249 .cell execution_count=1}
 ``` {.python .cell-code}
 import matplotlib.pyplot as plt
 import numpy as np
@@ -47,8 +47,8 @@ def f(theta):
     A3 = L2*np.cos(theta + gamma) - x2
     B3 = L2*np.sin(theta+ gamma) -y2
     D = 2 * (A2* B3 - B2*A3)
-    N1 = B3*(p2**2-p1**2-A2**2-B2)-B2*(p3**2-p1**2-A3**2-B3**2)
-    N2 = -A3*(p2**2-p1**2-A2**2-B2)+A2*(p3**2-p1**2-A3**2-B3**2)
+    N1 = B3*(p2**2-p1**2-A2**2-B2**2)-B2*(p3**2-p1**2-A3**2-B3**2)
+    N2 = -A3*(p2**2-p1**2-A2**2-B2**2)+A2*(p3**2-p1**2-A3**2-B3**2)
     return N1**2+N2**2-p1**2*D**2
 
 
@@ -88,7 +88,7 @@ plt.show()
 
 Reproduce Figure 1.15.
 
-::: {#83be5bac .cell execution_count=2}
+::: {#52b5e0eb .cell execution_count=2}
 ``` {.python .cell-code}
 def plot_triangle(point1, point2, point3, x1, x2 , y2):
     
@@ -144,7 +144,7 @@ plot_triangle((2,1),(1,2),(3,2), 4,4,0)
 
 Solve the forward kinematics problem for the planar Stewart platform specified by x1 = 5,(x2, y2) = (0, 6), L1 = L3 = 3, L2 = 3√2, γ = π/4, p1 = p2 = 5, p3 = 3. Begin by plotting f(θ). Use an equation solver of your choice to find all four poses (roots of   f(θ)), and plot them. Check your answers by verifying that p1, p2, p3 are the lengths of the struts in your plot.
 
-::: {#6cba85ca .cell execution_count=3}
+::: {#935ec5a9 .cell execution_count=3}
 ``` {.python .cell-code}
 from scipy.optimize import fsolve
 import numpy as np
@@ -170,8 +170,8 @@ def f(theta):
     A3 = L2 * np.cos(theta + gamma) - x2
     B3 = L2 * np.sin(theta + gamma) - y2
     D = 2 * (A2 * B3 - B2 * A3)
-    N1 = B3 * (p2**2 - p1**2 - A2**2 - B2) - B2 * (p3**2 - p1**2 - A3**2 - B3**2)
-    N2 = -A3 * (p2**2 - p1**2 - A2**2 - B2) + A2 * (p3**2 - p1**2 - A3**2 - B3**2)
+    N1 = B3 * (p2**2 - p1**2 - A2**2 - B2**2) - B2 * (p3**2 - p1**2 - A3**2 - B3**2)
+    N2 = -A3 * (p2**2 - p1**2 - A2**2 - B2**2) + A2 * (p3**2 - p1**2 - A3**2 - B3**2)
     return N1**2 + N2**2 - p1**2 * D**2
 
 x_array = np.linspace(-np.pi, np.pi,400)
@@ -179,46 +179,33 @@ plt.plot(x_array, f(x_array))
 plt.grid()
 plt.show()
 
-def rootfinder(start, stop, num):
-    initial_guesses = np.linspace(start, stop, num)  # Multiple guesses for better coverage
-    roots = []
-
-    for i in initial_guesses:
-        root = fsolve(f, i)
-        # Add unique roots only
-        if root not in roots :
-            roots.append(root)
-
-    roots = np.array(roots).flatten()
-    print("Roots found:", roots)
-
-    # Convert roots to a more usable format
-    return roots
-
-# Print the roots
-rootfinder(-np.pi, np.pi, 5)
-
+#def rootfinder(start, stop, num):
+#    initial_guesses = np.linspace(start, stop, num)  # Multiple guesses for better coverage
+#    roots = []
+#
+#    for i in initial_guesses:
+#        root = fsolve(f, i)
+#        # Add unique roots only
+#        if root not in roots :
+#            roots.append(root)
+#
+#    roots = np.array(roots).flatten()
+#    print("Roots found:", roots)
+#
+#    # Convert roots to a more usable format
+#    return roots
+#
+## Print the roots
+#rootfinder(-np.pi, np.pi, 5)
 ```
 
 ::: {.cell-output .cell-output-display}
 ![](realityc1_files/figure-html/cell-4-output-1.png){width=600 height=411}
 :::
-
-::: {.cell-output .cell-output-stdout}
-```
-Roots found: [-4.08036267 -0.95420323 -0.24600057  1.09426087  2.20282264]
-```
-:::
-
-::: {.cell-output .cell-output-display execution_count=3}
-```
-array([-4.08036267, -0.95420323, -0.24600057,  1.09426087,  2.20282264])
-```
-:::
 :::
 
 
-::: {#3f105b40 .cell execution_count=4}
+::: {#478c1f81 .cell execution_count=4}
 ``` {.python .cell-code}
 import numpy as np 
 import matplotlib.pyplot as plt 
@@ -242,8 +229,8 @@ def f(theta):
     A3 = L2 * np.cos(theta + gamma) - x2
     B3 = L2 * np.sin(theta + gamma) - y2
     D = 2 * (A2 * B3 - B2 * A3)
-    N1 = B3 * (p2**2 - p1**2 - A2**2 - B2) - B2 * (p3**2 - p1**2 - A3**2 - B3**2)
-    N2 = -A3 * (p2**2 - p1**2 - A2**2 - B2) + A2 * (p3**2 - p1**2 - A3**2 - B3**2)
+    N1 = B3 * (p2**2 - p1**2 - A2**2 - B2**2) - B2 * (p3**2 - p1**2 - A3**2 - B3**2)
+    N2 = -A3 * (p2**2 - p1**2 - A2**2 - B2**2) + A2 * (p3**2 - p1**2 - A3**2 - B3**2)
     return N1**2 + N2**2 - p1**2 * D**2
 
 def triangleplotting(theta):
@@ -253,8 +240,8 @@ def triangleplotting(theta):
     A3 = L2*np.cos(theta + gamma) - x2
     B3 = L2*np.sin(theta+ gamma) -y2
     D = 2 * (A2* B3 - B2*A3)
-    N1 = B3*(p2**2-p1**2-A2**2-B2)-B2*(p3**2-p1**2-A3**2-B3**2)
-    N2 = -A3*(p2**2-p1**2-A2**2-B2)+A2*(p3**2-p1**2-A3**2-B3**2)
+    N1 = B3*(p2**2-p1**2-A2**2-B2**2)-B2*(p3**2-p1**2-A3**2-B3**2)
+    N2 = -A3*(p2**2-p1**2-A2**2-B2**2)+A2*(p3**2-p1**2-A3**2-B3**2)
     x = N1/D
     y = N2/D
     
@@ -293,9 +280,9 @@ def secant(f, x0, x1, k):
 
 #fig,axes = plt.subplots(2,2, figsize = 10)
 plt.figure()
-firsttheta = secant(f, -1, -0.7, 10)
+firsttheta = secant(f, -1, -0.6, 10)
 triangleplotting(firsttheta)
-#print(firsttheta)
+print(firsttheta)
 
 plt.figure()
 secondtheta = secant(f, -.4, -.3, 5)
@@ -311,8 +298,10 @@ fourththeta = secant(f, 2, 2.2, 5)
 triangleplotting(fourththeta)
 ```
 
-::: {.cell-output .cell-output-display}
-![](realityc1_files/figure-html/cell-5-output-1.png){width=558 height=411}
+::: {.cell-output .cell-output-stdout}
+```
+-0.7208492044603896
+```
 :::
 
 ::: {.cell-output .cell-output-display}
@@ -324,7 +313,11 @@ triangleplotting(fourththeta)
 :::
 
 ::: {.cell-output .cell-output-display}
-![](realityc1_files/figure-html/cell-5-output-4.png){width=558 height=411}
+![](realityc1_files/figure-html/cell-5-output-4.png){width=561 height=411}
+:::
+
+::: {.cell-output .cell-output-display}
+![](realityc1_files/figure-html/cell-5-output-5.png){width=558 height=411}
 :::
 :::
 
@@ -332,7 +325,7 @@ triangleplotting(fourththeta)
 # Question 5 
 Change strut length to p2 = 7 and re-solve the problem. For these parameters, there are six poses
 
-::: {#80920f15 .cell execution_count=5}
+::: {#f853185e .cell execution_count=5}
 ``` {.python .cell-code}
 p2 = 7
 
@@ -396,7 +389,7 @@ triangleplotting(g6)
 # Question 6 
 Find a strut length p2, with the rest of the parameters as in Step 4, for which there are only two poses.
 
-::: {#c3c76db6 .cell execution_count=6}
+::: {#aa6f5df3 .cell execution_count=6}
 ``` {.python .cell-code}
 p2 = 0
 
@@ -405,41 +398,10 @@ plt.plot(x_array, f(x_array))
 plt.grid()
 plt.show()
 
-rootfinder(-np.pi, np.pi, 10)
-
 ```
 
 ::: {.cell-output .cell-output-display}
 ![](realityc1_files/figure-html/cell-7-output-1.png){width=600 height=411}
-:::
-
-::: {.cell-output .cell-output-stdout}
-```
-Roots found: [-4.97821343  1.30490762  1.30490024  1.30576139  1.30541648  1.30200921
-  1.30491879  1.30476176  1.30480726  1.30497186]
-```
-:::
-
-::: {.cell-output .cell-output-stderr}
-```
-C:\Users\Jenaveve\AppData\Local\Programs\Python\Python311\Lib\site-packages\scipy\optimize\_minpack_py.py:177: RuntimeWarning:
-
-The iteration is not making good progress, as measured by the 
-  improvement from the last ten iterations.
-
-C:\Users\Jenaveve\AppData\Local\Programs\Python\Python311\Lib\site-packages\scipy\optimize\_minpack_py.py:177: RuntimeWarning:
-
-The iteration is not making good progress, as measured by the 
-  improvement from the last five Jacobian evaluations.
-
-```
-:::
-
-::: {.cell-output .cell-output-display execution_count=6}
-```
-array([-4.97821343,  1.30490762,  1.30490024,  1.30576139,  1.30541648,
-        1.30200921,  1.30491879,  1.30476176,  1.30480726,  1.30497186])
-```
 :::
 :::
 

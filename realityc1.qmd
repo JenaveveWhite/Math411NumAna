@@ -48,8 +48,8 @@ def f(theta):
     A3 = L2*np.cos(theta + gamma) - x2
     B3 = L2*np.sin(theta+ gamma) -y2
     D = 2 * (A2* B3 - B2*A3)
-    N1 = B3*(p2**2-p1**2-A2**2-B2)-B2*(p3**2-p1**2-A3**2-B3**2)
-    N2 = -A3*(p2**2-p1**2-A2**2-B2)+A2*(p3**2-p1**2-A3**2-B3**2)
+    N1 = B3*(p2**2-p1**2-A2**2-B2**2)-B2*(p3**2-p1**2-A3**2-B3**2)
+    N2 = -A3*(p2**2-p1**2-A2**2-B2**2)+A2*(p3**2-p1**2-A3**2-B3**2)
     return N1**2+N2**2-p1**2*D**2
 
 
@@ -158,8 +158,8 @@ def f(theta):
     A3 = L2 * np.cos(theta + gamma) - x2
     B3 = L2 * np.sin(theta + gamma) - y2
     D = 2 * (A2 * B3 - B2 * A3)
-    N1 = B3 * (p2**2 - p1**2 - A2**2 - B2) - B2 * (p3**2 - p1**2 - A3**2 - B3**2)
-    N2 = -A3 * (p2**2 - p1**2 - A2**2 - B2) + A2 * (p3**2 - p1**2 - A3**2 - B3**2)
+    N1 = B3 * (p2**2 - p1**2 - A2**2 - B2**2) - B2 * (p3**2 - p1**2 - A3**2 - B3**2)
+    N2 = -A3 * (p2**2 - p1**2 - A2**2 - B2**2) + A2 * (p3**2 - p1**2 - A3**2 - B3**2)
     return N1**2 + N2**2 - p1**2 * D**2
 
 x_array = np.linspace(-np.pi, np.pi,400)
@@ -167,25 +167,24 @@ plt.plot(x_array, f(x_array))
 plt.grid()
 plt.show()
 
-def rootfinder(start, stop, num):
-    initial_guesses = np.linspace(start, stop, num)  # Multiple guesses for better coverage
-    roots = []
-
-    for i in initial_guesses:
-        root = fsolve(f, i)
-        # Add unique roots only
-        if root not in roots :
-            roots.append(root)
-
-    roots = np.array(roots).flatten()
-    print("Roots found:", roots)
-
-    # Convert roots to a more usable format
-    return roots
-
-# Print the roots
-rootfinder(-np.pi, np.pi, 5)
-
+#def rootfinder(start, stop, num):
+#    initial_guesses = np.linspace(start, stop, num)  # Multiple guesses for better coverage
+#    roots = []
+#
+#    for i in initial_guesses:
+#        root = fsolve(f, i)
+#        # Add unique roots only
+#        if root not in roots :
+#            roots.append(root)
+#
+#    roots = np.array(roots).flatten()
+#    print("Roots found:", roots)
+#
+#    # Convert roots to a more usable format
+#    return roots
+#
+## Print the roots
+#rootfinder(-np.pi, np.pi, 5)
 
 ```
 
@@ -212,8 +211,8 @@ def f(theta):
     A3 = L2 * np.cos(theta + gamma) - x2
     B3 = L2 * np.sin(theta + gamma) - y2
     D = 2 * (A2 * B3 - B2 * A3)
-    N1 = B3 * (p2**2 - p1**2 - A2**2 - B2) - B2 * (p3**2 - p1**2 - A3**2 - B3**2)
-    N2 = -A3 * (p2**2 - p1**2 - A2**2 - B2) + A2 * (p3**2 - p1**2 - A3**2 - B3**2)
+    N1 = B3 * (p2**2 - p1**2 - A2**2 - B2**2) - B2 * (p3**2 - p1**2 - A3**2 - B3**2)
+    N2 = -A3 * (p2**2 - p1**2 - A2**2 - B2**2) + A2 * (p3**2 - p1**2 - A3**2 - B3**2)
     return N1**2 + N2**2 - p1**2 * D**2
 
 def triangleplotting(theta):
@@ -223,8 +222,8 @@ def triangleplotting(theta):
     A3 = L2*np.cos(theta + gamma) - x2
     B3 = L2*np.sin(theta+ gamma) -y2
     D = 2 * (A2* B3 - B2*A3)
-    N1 = B3*(p2**2-p1**2-A2**2-B2)-B2*(p3**2-p1**2-A3**2-B3**2)
-    N2 = -A3*(p2**2-p1**2-A2**2-B2)+A2*(p3**2-p1**2-A3**2-B3**2)
+    N1 = B3*(p2**2-p1**2-A2**2-B2**2)-B2*(p3**2-p1**2-A3**2-B3**2)
+    N2 = -A3*(p2**2-p1**2-A2**2-B2**2)+A2*(p3**2-p1**2-A3**2-B3**2)
     x = N1/D
     y = N2/D
     
@@ -263,9 +262,9 @@ def secant(f, x0, x1, k):
 
 #fig,axes = plt.subplots(2,2, figsize = 10)
 plt.figure()
-firsttheta = secant(f, -1, -0.7, 10)
+firsttheta = secant(f, -1, -0.6, 10)
 triangleplotting(firsttheta)
-#print(firsttheta)
+print(firsttheta)
 
 plt.figure()
 secondtheta = secant(f, -.4, -.3, 5)
@@ -331,7 +330,6 @@ plt.plot(x_array, f(x_array))
 plt.grid()
 plt.show()
 
-rootfinder(-np.pi, np.pi, 10)
 
 
 ```
