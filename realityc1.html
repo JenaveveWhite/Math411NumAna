@@ -134,8 +134,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="question-1-and-2" class="level1">
 <h1>Question 1 and 2</h1>
-<p>Write a Python function for f(θ). The parameters L1, L2, L3, γ, x1, x2, y2 are fixed constants, and the strut lengths p1, p2, p3 will be known for a given pose.</p>
-<div id="87cec6a4" class="cell" data-execution_count="1">
+<p>Write a Python function for f(θ). The parameters $L_1, L_2, L_3, , x_1, x_2, y_2 $ constants, and the strut lengths p1, p2, p3 will be known for a given pose.</p>
+<div id="b8234fd6" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -197,7 +197,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="question-3" class="level1">
 <h1>Question 3</h1>
 <p>Reproduce Figure 1.15.</p>
-<div id="a92d8e50" class="cell" data-execution_count="2">
+<div id="47c4b96e" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_triangle(point1, point2, point3, x1, x2 , y2):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    </span>
@@ -255,7 +255,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="question-4" class="level1">
 <h1>Question 4</h1>
 <p>Solve the forward kinematics problem for the planar Stewart platform specified by x1 = 5,(x2, y2) = (0, 6), L1 = L3 = 3, L2 = 3√2, γ = π/4, p1 = p2 = 5, p3 = 3. Begin by plotting f(θ). Use an equation solver of your choice to find all four poses (roots of f(θ)), and plot them. Check your answers by verifying that p1, p2, p3 are the lengths of the struts in your plot.</p>
-<div id="54b23698" class="cell" data-execution_count="3">
+<div id="e65f3ee6" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> fsolve</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -321,30 +321,151 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>array([-4.08036267, -0.95420323, -0.24600057,  1.09426087,  2.20282264])</code></pre>
 </div>
 </div>
+<div id="878f1747" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>L1 <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>L2 <span class="op">=</span> <span class="dv">3</span> <span class="op">*</span> np.sqrt(<span class="dv">2</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>L3 <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>gamma <span class="op">=</span> np.pi <span class="op">/</span><span class="dv">4</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>x1 <span class="op">=</span> <span class="dv">5</span> </span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>x2 <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>y2 <span class="op">=</span> <span class="dv">6</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>p1 <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>p2 <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>p3 <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the function f(θ) from earlier</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(theta):</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    A2 <span class="op">=</span> L3 <span class="op">*</span> np.cos(theta) <span class="op">-</span> x1 </span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    B2 <span class="op">=</span> L3 <span class="op">*</span> np.sin(theta)</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    A3 <span class="op">=</span> L2 <span class="op">*</span> np.cos(theta <span class="op">+</span> gamma) <span class="op">-</span> x2</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    B3 <span class="op">=</span> L2 <span class="op">*</span> np.sin(theta <span class="op">+</span> gamma) <span class="op">-</span> y2</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    D <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> (A2 <span class="op">*</span> B3 <span class="op">-</span> B2 <span class="op">*</span> A3)</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>    N1 <span class="op">=</span> B3 <span class="op">*</span> (p2<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> p1<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> A2<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> B2) <span class="op">-</span> B2 <span class="op">*</span> (p3<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> p1<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> A3<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> B3<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    N2 <span class="op">=</span> <span class="op">-</span>A3 <span class="op">*</span> (p2<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> p1<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> A2<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> B2) <span class="op">+</span> A2 <span class="op">*</span> (p3<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> p1<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> A3<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> B3<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> N1<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> N2<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> p1<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> D<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> triangleplotting(theta):</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>    A2 <span class="op">=</span> L3<span class="op">*</span>np.cos(theta)<span class="op">-</span>x1 </span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>    B2<span class="op">=</span> L3<span class="op">*</span>np.sin(theta)</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>    A3 <span class="op">=</span> L2<span class="op">*</span>np.cos(theta <span class="op">+</span> gamma) <span class="op">-</span> x2</span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>    B3 <span class="op">=</span> L2<span class="op">*</span>np.sin(theta<span class="op">+</span> gamma) <span class="op">-</span>y2</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>    D <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> (A2<span class="op">*</span> B3 <span class="op">-</span> B2<span class="op">*</span>A3)</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>    N1 <span class="op">=</span> B3<span class="op">*</span>(p2<span class="op">**</span><span class="dv">2</span><span class="op">-</span>p1<span class="op">**</span><span class="dv">2</span><span class="op">-</span>A2<span class="op">**</span><span class="dv">2</span><span class="op">-</span>B2)<span class="op">-</span>B2<span class="op">*</span>(p3<span class="op">**</span><span class="dv">2</span><span class="op">-</span>p1<span class="op">**</span><span class="dv">2</span><span class="op">-</span>A3<span class="op">**</span><span class="dv">2</span><span class="op">-</span>B3<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>    N2 <span class="op">=</span> <span class="op">-</span>A3<span class="op">*</span>(p2<span class="op">**</span><span class="dv">2</span><span class="op">-</span>p1<span class="op">**</span><span class="dv">2</span><span class="op">-</span>A2<span class="op">**</span><span class="dv">2</span><span class="op">-</span>B2)<span class="op">+</span>A2<span class="op">*</span>(p3<span class="op">**</span><span class="dv">2</span><span class="op">-</span>p1<span class="op">**</span><span class="dv">2</span><span class="op">-</span>A3<span class="op">**</span><span class="dv">2</span><span class="op">-</span>B3<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> N1<span class="op">/</span>D</span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> N2<span class="op">/</span>D</span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>    <span class="co">#coordinate points for the triangle </span></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>    u1 <span class="op">=</span> N1<span class="op">/</span>D</span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>    u2 <span class="op">=</span> x <span class="op">+</span> L3 <span class="op">*</span> np.cos(theta)</span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>    u3 <span class="op">=</span> x <span class="op">+</span> L2 <span class="op">*</span> np.cos(theta <span class="op">+</span> gamma)</span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>    m1 <span class="op">=</span> N2<span class="op">/</span>D</span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>    m2 <span class="op">=</span> y <span class="op">+</span> L3 <span class="op">*</span> np.sin(theta)</span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>    m3 <span class="op">=</span> y <span class="op">+</span> L2 <span class="op">*</span> np.sin(gamma <span class="op">+</span> theta)</span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>    <span class="co">#plots the inner triangle.</span></span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>    plt.plot([x,u3, x <span class="op">+</span> L3 <span class="op">*</span> np.cos(theta),x ],[y, y <span class="op">+</span> L2 <span class="op">*</span> np.sin(gamma <span class="op">+</span> theta), y <span class="op">+</span> L3 <span class="op">*</span> np.sin(theta),y ])</span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>    <span class="co">#plots strut 1</span></span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>    plt.plot([<span class="dv">0</span>, x],[<span class="dv">0</span>, y])</span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>    <span class="co">#plots strut 2</span></span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>    plt.plot([x1,u2 ],[<span class="dv">0</span>, m2])</span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>    <span class="co">#plots strut 3</span></span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>    plt.plot([x2, u3],[y2, m3])</span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a><span class="co">#tested Triangle plot</span></span>
+<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a><span class="co">#triangleplotting( np.pi /4)</span></span>
+<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> secant(f, x0, x1, k):</span>
+<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,k):</span>
+<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a>        x2 <span class="op">=</span> x1 <span class="op">-</span> f(x1)<span class="op">*</span>(x1<span class="op">-</span>x0)<span class="op">/</span>(f(x1)<span class="op">-</span>f(x0))</span>
+<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a>        x0 <span class="op">=</span>x1 </span>
+<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a>        x1 <span class="op">=</span> x2</span>
+<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x2</span>
+<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a><span class="co">#fig,axes = plt.subplots(2,2, figsize = 10)</span></span>
+<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a>firsttheta <span class="op">=</span> secant(f, <span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="fl">0.7</span>, <span class="dv">10</span>)</span>
+<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a>triangleplotting(firsttheta)</span>
+<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a>secondtheta <span class="op">=</span> secant(f, <span class="op">-</span><span class="fl">.4</span>, <span class="op">-</span><span class="fl">.3</span>, <span class="dv">10</span>)</span>
+<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a>triangleplotting(secondtheta)</span>
+<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a>thirdtheta <span class="op">=</span> secant(f, <span class="dv">1</span>, <span class="fl">1.2</span>, <span class="dv">10</span>)</span>
+<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a>triangleplotting(thirdtheta)</span>
+<span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb6-84"><a href="#cb6-84" aria-hidden="true" tabindex="-1"></a>fourththeta <span class="op">=</span> secant(f, <span class="dv">2</span>, <span class="fl">2.2</span>, <span class="dv">10</span>)</span>
+<span id="cb6-85"><a href="#cb6-85" aria-hidden="true" tabindex="-1"></a>triangleplotting(fourththeta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>C:\Users\Jenaveve\AppData\Local\Temp\ipykernel_12124\3250899786.py:65: RuntimeWarning:
+
+invalid value encountered in scalar divide
+</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="realityc1_files/figure-html/cell-5-output-2.png" width="558" height="411" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="realityc1_files/figure-html/cell-5-output-3.png" width="558" height="411" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="realityc1_files/figure-html/cell-5-output-4.png" width="558" height="411" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="realityc1_files/figure-html/cell-5-output-5.png" width="558" height="411" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="question-5" class="level1">
 <h1>Question 5</h1>
 <p>Change strut length to p2 = 7 and re-solve the problem. For these parameters, there are six poses</p>
-<div id="a7d2c65f" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>p2 <span class="op">=</span> <span class="dv">7</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>x_array <span class="op">=</span> np.linspace(<span class="op">-</span>np.pi, np.pi,<span class="dv">400</span>)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>plt.plot(x_array, f(x_array))</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>rootfinder(<span class="op">-</span>np.pi, np.pi, <span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="c91f4198" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>p2 <span class="op">=</span> <span class="dv">7</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>x_array <span class="op">=</span> np.linspace(<span class="op">-</span>np.pi, np.pi,<span class="dv">400</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>plt.plot(x_array, f(x_array))</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>rootfinder(<span class="op">-</span>np.pi, np.pi, <span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="realityc1_files/figure-html/cell-5-output-1.png" width="603" height="411" class="figure-img"></p>
+<p><img src="realityc1_files/figure-html/cell-6-output-1.png" width="603" height="411" class="figure-img"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Roots found: [-3.76002328  0.02609624  0.02609624  0.46848899  0.97538787  2.52316202]</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="4">
+<div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>array([-3.76002328,  0.02609624,  0.02609624,  0.46848899,  0.97538787,
         2.52316202])</code></pre>
 </div>
@@ -353,19 +474,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="question-6" class="level1">
 <h1>Question 6</h1>
 <p>Find a strut length p2, with the rest of the parameters as in Step 4, for which there are only two poses.</p>
-<div id="8ba9354d" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>p2 <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>x_array <span class="op">=</span> np.linspace(<span class="op">-</span>np.pi, np.pi,<span class="dv">500</span>)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>plt.plot(x_array, f(x_array))</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>rootfinder(<span class="op">-</span>np.pi, np.pi, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fb9235f7" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>p2 <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>x_array <span class="op">=</span> np.linspace(<span class="op">-</span>np.pi, np.pi,<span class="dv">500</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>plt.plot(x_array, f(x_array))</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>rootfinder(<span class="op">-</span>np.pi, np.pi, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="realityc1_files/figure-html/cell-6-output-1.png" width="600" height="411" class="figure-img"></p>
+<p><img src="realityc1_files/figure-html/cell-7-output-1.png" width="600" height="411" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -385,7 +506,7 @@ The iteration is not making good progress, as measured by the
   improvement from the last five Jacobian evaluations.
 </code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>array([-4.97821343,  1.30490762,  1.30490024,  1.30576139,  1.30541648,
         1.30200921,  1.30491879,  1.30476176,  1.30480726,  1.30497186])</code></pre>
 </div>

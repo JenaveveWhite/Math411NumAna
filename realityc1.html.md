@@ -9,6 +9,7 @@ format:
   html: 
     toc: true
     toc-depth: 2
+    code-fold: false
 ---
 
 
@@ -22,10 +23,9 @@ A Stewart platform is a versatile parallel manipulator characterized by six degr
 
 # Question 1 and 2
 
-Write a Python function for f(θ). The parameters L1, L2, L3, γ, x1, x2, y2 are fixed
-constants, and the strut lengths p1, p2, p3 will be known for a given pose.
+Write a Python function for f(θ). The parameters $L_1, L_2, L_3, \gamma, x_1, x_2, y_2 \text{ are fixed} $ constants, and the strut lengths p1, p2, p3 will be known for a given pose.
 
-::: {#87cec6a4 .cell execution_count=1}
+::: {#b8234fd6 .cell execution_count=1}
 ``` {.python .cell-code}
 import matplotlib.pyplot as plt
 import numpy as np
@@ -88,7 +88,7 @@ plt.show()
 
 Reproduce Figure 1.15.
 
-::: {#a92d8e50 .cell execution_count=2}
+::: {#47c4b96e .cell execution_count=2}
 ``` {.python .cell-code}
 def plot_triangle(point1, point2, point3, x1, x2 , y2):
     
@@ -144,7 +144,7 @@ plot_triangle((2,1),(1,2),(3,2), 4,4,0)
 
 Solve the forward kinematics problem for the planar Stewart platform specified by x1 = 5,(x2, y2) = (0, 6), L1 = L3 = 3, L2 = 3√2, γ = π/4, p1 = p2 = 5, p3 = 3. Begin by plotting f(θ). Use an equation solver of your choice to find all four poses (roots of   f(θ)), and plot them. Check your answers by verifying that p1, p2, p3 are the lengths of the struts in your plot.
 
-::: {#54b23698 .cell execution_count=3}
+::: {#e65f3ee6 .cell execution_count=3}
 ``` {.python .cell-code}
 from scipy.optimize import fsolve
 import numpy as np
@@ -218,10 +218,126 @@ array([-4.08036267, -0.95420323, -0.24600057,  1.09426087,  2.20282264])
 :::
 
 
+::: {#878f1747 .cell execution_count=4}
+``` {.python .cell-code}
+import numpy as np 
+import matplotlib.pyplot as plt 
+
+
+L1 = 3
+L2 = 3 * np.sqrt(2)
+L3 = 3
+gamma = np.pi /4
+x1 = 5 
+x2 = 0
+y2 = 6
+p1 = 5
+p2 = 5
+p3 = 3
+
+
+# Define the function f(θ) from earlier
+def f(theta):
+    A2 = L3 * np.cos(theta) - x1 
+    B2 = L3 * np.sin(theta)
+    A3 = L2 * np.cos(theta + gamma) - x2
+    B3 = L2 * np.sin(theta + gamma) - y2
+    D = 2 * (A2 * B3 - B2 * A3)
+    N1 = B3 * (p2**2 - p1**2 - A2**2 - B2) - B2 * (p3**2 - p1**2 - A3**2 - B3**2)
+    N2 = -A3 * (p2**2 - p1**2 - A2**2 - B2) + A2 * (p3**2 - p1**2 - A3**2 - B3**2)
+    return N1**2 + N2**2 - p1**2 * D**2
+
+def triangleplotting(theta):
+
+    A2 = L3*np.cos(theta)-x1 
+    B2= L3*np.sin(theta)
+    A3 = L2*np.cos(theta + gamma) - x2
+    B3 = L2*np.sin(theta+ gamma) -y2
+    D = 2 * (A2* B3 - B2*A3)
+    N1 = B3*(p2**2-p1**2-A2**2-B2)-B2*(p3**2-p1**2-A3**2-B3**2)
+    N2 = -A3*(p2**2-p1**2-A2**2-B2)+A2*(p3**2-p1**2-A3**2-B3**2)
+    x = N1/D
+    y = N2/D
+    
+    #coordinate points for the triangle 
+    u1 = N1/D
+    u2 = x + L3 * np.cos(theta)
+    u3 = x + L2 * np.cos(theta + gamma)
+    m1 = N2/D
+    m2 = y + L3 * np.sin(theta)
+    m3 = y + L2 * np.sin(gamma + theta)
+    #plots the inner triangle.
+    plt.plot([x,u3, x + L3 * np.cos(theta),x ],[y, y + L2 * np.sin(gamma + theta), y + L3 * np.sin(theta),y ])
+    
+    #plots strut 1
+    plt.plot([0, x],[0, y])
+
+    #plots strut 2
+    plt.plot([x1,u2 ],[0, m2])
+
+    #plots strut 3
+    plt.plot([x2, u3],[y2, m3])
+
+
+#tested Triangle plot
+#triangleplotting( np.pi /4)
+
+def secant(f, x0, x1, k):
+    for i in range(1,k):
+        x2 = x1 - f(x1)*(x1-x0)/(f(x1)-f(x0))
+        x0 =x1 
+        x1 = x2
+    return x2
+
+#fig,axes = plt.subplots(2,2, figsize = 10)
+plt.figure()
+firsttheta = secant(f, -1, -0.7, 10)
+triangleplotting(firsttheta)
+
+plt.figure()
+secondtheta = secant(f, -.4, -.3, 10)
+triangleplotting(secondtheta)
+
+plt.figure()
+thirdtheta = secant(f, 1, 1.2, 10)
+triangleplotting(thirdtheta)
+
+plt.figure()
+fourththeta = secant(f, 2, 2.2, 10)
+triangleplotting(fourththeta)
+```
+
+::: {.cell-output .cell-output-stderr}
+```
+C:\Users\Jenaveve\AppData\Local\Temp\ipykernel_12124\3250899786.py:65: RuntimeWarning:
+
+invalid value encountered in scalar divide
+
+```
+:::
+
+::: {.cell-output .cell-output-display}
+![](realityc1_files/figure-html/cell-5-output-2.png){width=558 height=411}
+:::
+
+::: {.cell-output .cell-output-display}
+![](realityc1_files/figure-html/cell-5-output-3.png){width=558 height=411}
+:::
+
+::: {.cell-output .cell-output-display}
+![](realityc1_files/figure-html/cell-5-output-4.png){width=558 height=411}
+:::
+
+::: {.cell-output .cell-output-display}
+![](realityc1_files/figure-html/cell-5-output-5.png){width=558 height=411}
+:::
+:::
+
+
 # Question 5 
 Change strut length to p2 = 7 and re-solve the problem. For these parameters, there are six poses
 
-::: {#a7d2c65f .cell execution_count=4}
+::: {#c91f4198 .cell execution_count=5}
 ``` {.python .cell-code}
 p2 = 7
 
@@ -235,7 +351,7 @@ rootfinder(-np.pi, np.pi, 6)
 ```
 
 ::: {.cell-output .cell-output-display}
-![](realityc1_files/figure-html/cell-5-output-1.png){width=603 height=411}
+![](realityc1_files/figure-html/cell-6-output-1.png){width=603 height=411}
 :::
 
 ::: {.cell-output .cell-output-stdout}
@@ -244,7 +360,7 @@ Roots found: [-3.76002328  0.02609624  0.02609624  0.46848899  0.97538787  2.523
 ```
 :::
 
-::: {.cell-output .cell-output-display execution_count=4}
+::: {.cell-output .cell-output-display execution_count=5}
 ```
 array([-3.76002328,  0.02609624,  0.02609624,  0.46848899,  0.97538787,
         2.52316202])
@@ -256,7 +372,7 @@ array([-3.76002328,  0.02609624,  0.02609624,  0.46848899,  0.97538787,
 # Question 6 
 Find a strut length p2, with the rest of the parameters as in Step 4, for which there are only two poses.
 
-::: {#8ba9354d .cell execution_count=5}
+::: {#fb9235f7 .cell execution_count=6}
 ``` {.python .cell-code}
 p2 = 0
 
@@ -270,7 +386,7 @@ rootfinder(-np.pi, np.pi, 10)
 ```
 
 ::: {.cell-output .cell-output-display}
-![](realityc1_files/figure-html/cell-6-output-1.png){width=600 height=411}
+![](realityc1_files/figure-html/cell-7-output-1.png){width=600 height=411}
 :::
 
 ::: {.cell-output .cell-output-stdout}
@@ -295,7 +411,7 @@ The iteration is not making good progress, as measured by the
 ```
 :::
 
-::: {.cell-output .cell-output-display execution_count=5}
+::: {.cell-output .cell-output-display execution_count=6}
 ```
 array([-4.97821343,  1.30490762,  1.30490024,  1.30576139,  1.30541648,
         1.30200921,  1.30491879,  1.30476176,  1.30480726,  1.30497186])
