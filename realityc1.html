@@ -8,7 +8,7 @@
 
 <meta name="author" content="Jenaveve White">
 
-<title>Reality Check 1, Stewart Platform</title>
+<title>Reality Check 1, Stewart Platform in 2 Dimensions</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -101,30 +101,15 @@ window.Quarto = {
 
 </head>
 
-<body>
+<body class="fullcontent">
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-  <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul class="collapse">
-  <li><a href="#reality-check" id="toc-reality-check" class="nav-link active" data-scroll-target="#reality-check">Reality Check</a></li>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#question-1-and-2" id="toc-question-1-and-2" class="nav-link" data-scroll-target="#question-1-and-2">Question 1 and 2</a></li>
-  <li><a href="#question-3" id="toc-question-3" class="nav-link" data-scroll-target="#question-3">Question 3</a></li>
-  <li><a href="#question-4" id="toc-question-4" class="nav-link" data-scroll-target="#question-4">Question 4</a></li>
-  <li><a href="#question-5" id="toc-question-5" class="nav-link" data-scroll-target="#question-5">Question 5</a></li>
-  <li><a href="#question-6" id="toc-question-6" class="nav-link" data-scroll-target="#question-6">Question 6</a></li>
-  <li><a href="#question-7" id="toc-question-7" class="nav-link" data-scroll-target="#question-7">Question 7</a></li>
-  </ul>
-</nav>
-</div>
+
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Reality Check 1, Stewart Platform</h1>
+<h1 class="title">Reality Check 1, Stewart Platform in 2 Dimensions</h1>
 </div>
 
 
@@ -138,12 +123,6 @@ window.Quarto = {
           </div>
   </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">Invalid Date</p>
-    </div>
-  </div>
   
     
   </div>
@@ -164,7 +143,7 @@ window.Quarto = {
 <section id="question-1-and-2" class="level1">
 <h1>Question 1 and 2</h1>
 <p>Write a Python function for f(θ). The parameters <span class="math inline">\(L_1, L_2, L_3, \gamma, x_1, x_2, y_2 \text{ are fixed}\)</span> constants, and the strut lengths p1, p2, p3 will be known for a given pose.</p>
-<div id="1caa0249" class="cell" data-execution_count="1">
+<div id="018e6a16" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -226,7 +205,7 @@ window.Quarto = {
 <section id="question-3" class="level1">
 <h1>Question 3</h1>
 <p>Reproduce Figure 1.15.</p>
-<div id="52b5e0eb" class="cell" data-execution_count="2">
+<div id="8c8d5385" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_triangle(point1, point2, point3, x1, x2 , y2):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    </span>
@@ -284,7 +263,7 @@ window.Quarto = {
 <section id="question-4" class="level1">
 <h1>Question 4</h1>
 <p>Solve the forward kinematics problem for the planar Stewart platform specified by x1 = 5,(x2, y2) = (0, 6), L1 = L3 = 3, L2 = 3√2, γ = π/4, p1 = p2 = 5, p3 = 3. Begin by plotting f(θ). Use an equation solver of your choice to find all four poses (roots of f(θ)), and plot them. Check your answers by verifying that p1, p2, p3 are the lengths of the struts in your plot.</p>
-<div id="935ec5a9" class="cell" data-execution_count="3">
+<div id="44e825a6" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> fsolve</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -344,7 +323,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="478c1f81" class="cell" data-execution_count="4">
+<div id="8118d78c" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np </span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt </span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -470,7 +449,7 @@ window.Quarto = {
 <section id="question-5" class="level1">
 <h1>Question 5</h1>
 <p>Change strut length to p2 = 7 and re-solve the problem. For these parameters, there are six poses</p>
-<div id="f853185e" class="cell" data-execution_count="5">
+<div id="67cfdb67" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>p2 <span class="op">=</span> <span class="dv">7</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>x_array <span class="op">=</span> np.linspace(<span class="op">-</span>np.pi, np.pi,<span class="dv">400</span>)</span>
@@ -551,7 +530,7 @@ window.Quarto = {
 <section id="question-6" class="level1">
 <h1>Question 6</h1>
 <p>Find a strut length p2, with the rest of the parameters as in Step 4, for which there are only two poses.</p>
-<div id="aa6f5df3" class="cell" data-execution_count="6">
+<div id="0474de2c" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>p2 <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>x_array <span class="op">=</span> np.linspace(<span class="op">-</span>np.pi, np.pi,<span class="dv">500</span>)</span>

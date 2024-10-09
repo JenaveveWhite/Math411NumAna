@@ -1,17 +1,8 @@
 ---
-title: "Reality Check 1, Stewart Platform"
+title: "Reality Check 1, Stewart Platform in 2 Dimensions"
 author: "Jenaveve White"
-editor: visual
-execute:
-  keep-md: true
-date: "`r Sys.Date()`"
-format: 
-  html: 
-    toc: true
-    toc-depth: 2
-    code-fold: false
+format: html
 ---
-
 
 ## Reality Check
 Jenaveve White
@@ -21,11 +12,42 @@ Jenaveve White
 A Stewart platform is a versatile parallel manipulator characterized by six degrees of freedom, allowing for precise control of a mobile platform connected to a fixed base via six adjustable legs. Developed by Eric G. Stewart in the 1960s, these platforms can move freely in three-dimensional space, making them ideal for various applications, including robotics, flight simulators, medical devices, and aerospace testing. Their advantages include high precision, versatility in motion profiles, and a compact design, which enable them to effectively accommodate diverse payloads and operational requirements. Overall, Stewart platforms play a crucial role in advancing technology across multiple fields by providing sophisticated motion control solutions.
 
 
-# Question 1 and 2
+# Question 1 
 
 Write a Python function for f(θ). The parameters $L_1, L_2, L_3, \gamma, x_1, x_2, y_2 \text{ are fixed}$ constants, and the strut lengths p1, p2, p3 will be known for a given pose.
 
-```{python, python.reticulate = FALSE}
+To write the function for f(θ) I created a function named f that takes in a parameter $\theta$ and calculates f(θ). The parameters that are fixed were set to global variables and later called inside of my f function. From our text, we have relationships for our 2 dimension stewart platform as follows: 
+$$ A_2 = L_3cos(\theta)-x1 
+$$
+$$ B_2= L_3sin(\theta)
+$$
+
+$$    A_3 = L_2cos(\theta + \gamma) - x_2
+$$
+
+$$
+    B_3 = L_2sin(\theta+ \gamma) -y_2
+$$
+   
+$$ D = 2(A_2B_3 - B_2A_3)
+$$
+$$
+    N_1 = B_3(p_2^2-p_1^2-A_2^2-B_2^2)-B_2  
+    (p_3^2-p_1^2-A_3^2-B_3^2)
+$$
+$$
+    N_2 = -A_3(p_2^2-p_1^2-A_2^2-B_2^2)+A_2(p_3^2-p_1^2-A_3^2-B_3^2)
+$$
+
+Using these equations, the function calculates $N_1^2+N_2^2-p_1^2D^2$, which should output 0, if working correctly.
+
+After creating this function, to ensure it is finding the roots correctly my code returned a value of .0000000000004, which for our purposes is essentially zero. This tells us that the function is working properly. The miniscule value is likely due to a computational rounding error, which is fairly insignificant. 
+
+# Question 2
+
+
+
+```{python, echo= False, results='hide'}
 
 
 import matplotlib.pyplot as plt
@@ -84,7 +106,7 @@ plt.show()
 
 Reproduce Figure 1.15.
 
-```{python, python.reticulate = FALSE}
+```{python, echo=false}
 
 def plot_triangle(point1, point2, point3, x1, x2 , y2):
     
@@ -132,7 +154,7 @@ plot_triangle((2,1),(1,2),(3,2), 4,4,0)
 
 Solve the forward kinematics problem for the planar Stewart platform specified by x1 = 5,(x2, y2) = (0, 6), L1 = L3 = 3, L2 = 3√2, γ = π/4, p1 = p2 = 5, p3 = 3. Begin by plotting f(θ). Use an equation solver of your choice to find all four poses (roots of   f(θ)), and plot them. Check your answers by verifying that p1, p2, p3 are the lengths of the struts in your plot.
 
-```{python, python.reticulate = FALSE }
+```{python, echo=false}
 
 from scipy.optimize import fsolve
 import numpy as np
@@ -188,7 +210,7 @@ plt.show()
 
 ```
 
-```{python}
+```{python, , echo=false}
 import numpy as np 
 import matplotlib.pyplot as plt 
 
@@ -284,7 +306,7 @@ triangleplotting(fourththeta)
 # Question 5 
 Change strut length to p2 = 7 and re-solve the problem. For these parameters, there are six poses
 
-```{python}
+```{python, echo=false}
 
 p2 = 7
 
@@ -313,32 +335,56 @@ triangleplotting(g5)
 plt.figure()
 triangleplotting(g6)
 
-
-
-
-
 ```
 
 # Question 6 
 Find a strut length p2, with the rest of the parameters as in Step 4, for which there are only two poses.
 
-```{python}
-p2 = 0
+```{python, echo=false}
+p2 = 4
 
-x_array = np.linspace(-np.pi, np.pi,500)
+x_array = np.linspace(-np.pi, np.pi,400)
 plt.plot(x_array, f(x_array))
 plt.grid()
 plt.show()
 
+g1 = secant(f,1,1.5, 5)
+print(g1)
+print(g2)
+g2 = secant(f, 1.5, 2, 5)
 
+plt.figure()
+triangleplotting(g1)
+plt.figure()
+triangleplotting(g2)
 
 ```
 
 # Question 7 
 Calculate the intervals in p2, with the rest of the parameters as in Step 4, for which there are 0, 2, 4, and 6 poses, respectively
 
-```{python}
+```{python, echo=false}
 
+p2 = 0
+p2_f = 10
+d_p2 =  0.01
 
+# Creating an interval to define where there are exactly 4 roots in our f function. 
+
+Theta = np.linspace(-np.pi, np.pi, 1000)
+zeros_prev= 0 
+while p2< p2_f:
+    zeros = 0
+    function = f(Theta)
+    value1= 1 
+    for value in function: 
+       if value1*value < 0:
+           zeros += 1
+       value1 = value 
+    if zeros != zeros_prev:
+       print(p2)
+   
+    zeros_prev = zeros 
+    p2 += d_p2
 
 ```
