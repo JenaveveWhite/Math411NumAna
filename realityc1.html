@@ -132,7 +132,7 @@ window.Quarto = {
 <p>Plot f(θ) on [−π, π]. As a check of your work, there should be roots at θ = ±π/4.</p>
 <p>To create this graph I used my created f() function to plot an array of 400 points on the interval [−π, π].</p>
 <p>As seen below, my function is working properly, as roots can seen at θ = ±π/4.</p>
-<div id="86c747e9" class="cell" data-execution_count="1">
+<div id="b127720f" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -147,7 +147,7 @@ window.Quarto = {
 <p>For question 3 we are asked to Reproduce Figure 1.15.</p>
 <p>First step in creating these graphics was to create a triangle function that plots the points, struts, and triangle lines. The parameters of this function take in 6 point. First the three points on the triangle, then the three fixed nodes for the struts. After creating this function, I called it twice and passed in the appropriate points to replicate the figures.</p>
 <p>My two triangle figures properly replicate those shown in figure 1.15 and plotted red triangles with the correct verticies, placed small blue circles at the strut anchor points, and plotted the struts.</p>
-<div id="b7d0d2ea" class="cell" data-execution_count="2">
+<div id="c5ad5df2" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -169,7 +169,7 @@ window.Quarto = {
 <p>Solve the forward kinematics problem for the planar Stewart platform specified by x1 = 5,(x2, y2) = (0, 6), L1 = L3 = 3, L2 = 3√2, γ = π/4, p1 = p2 = 5, p3 = 3. Begin by plotting f(θ). Use an equation solver of your choice to find all four poses (roots of f(θ)), and plot them. Check your answers by verifying that p1, p2, p3 are the lengths of the struts in your plot.</p>
 <p>My approach for this question was to use the secant method to solve for the root. This code was provided to us on our canvas page under the python functions.</p>
 <p>The resulting thetas for the 4 distinct poses were -0.721, .0.331, 1.144, and 2.116</p>
-<div id="d6219bd2" class="cell" data-execution_count="3">
+<div id="e389fc34" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -184,7 +184,7 @@ window.Quarto = {
 <p>For part 4b the four poses should be graphed.</p>
 <p>For solving this question I created a function to graph the poses based on a value theta. I created a function which takes in theta and uses the formulas from the f function previously descibed, to plot the plots of the triangle and the struts with their fixed nodes.</p>
 <p>Upon viewing these graphs, you can see that the proper theta values have been found, and that the graphs are producing the appropriate images.</p>
-<div id="cb87d58e" class="cell" data-execution_count="4">
+<div id="0a5d3d03" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -220,7 +220,7 @@ window.Quarto = {
 <p>Change strut length to p2 = 7 and re-solve the problem. For these parameters, there are six poses</p>
 <p>To approach this problem, I changed the global variable p2 to be set to 7. After doing so, I created the function plot with 400 points on the interval negative pi to pi. The six poses are related to the theta value found from the roots. These values are shown when the poses are graphed.</p>
 <p>Along with the correct function graphed, there are the 6 unique poses and their theta values as the graph titles. The solution to this problem has been clearly shown through the following graphs.</p>
-<div id="1f3e3367" class="cell" data-execution_count="5">
+<div id="cc9b3b0e" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -277,7 +277,7 @@ window.Quarto = {
 <p>Find a strut length p2, with the rest of the parameters as in Step 4, for which there are only two poses.</p>
 <p>For this question, I used a guess and check method. I found that for 2 poses, a strut length of 4 outputs the correct number of roots. After finding the correct p2 length, I ploted the theta function similarly to my past graphs. Along with the function, I have created two graphs that show the poses at the 2 thetas.</p>
 <p>I believe that this properly displays a found strut length for which there are only two poses.</p>
-<div id="edf6eea3" class="cell" data-execution_count="6">
+<div id="30562bec" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -307,7 +307,7 @@ window.Quarto = {
 <p>To calculate the intervals for which there are 0,2,4, and 6 roots, I created a function that displays when value of our function f based on iterating through p2 lengths from 0 to 10 with a step of 0.01. From this function we can find where the zeros change from 0 zeros, to 2 zeroes, to 4 zeroes, to 6 zeroes, and then back down.</p>
 <p>The results of this function shows that the intervals for 0 zeroes are [0,3.7199] and [9.2699, <span class="math inline">\(\infty\)</span>]. The interval for 2 roots is [3.7199,4.8699] and [7.8499,9.2699]. The interval for 4 poses are [4.8699, 6.9699] and [7.0299, 7.8499]. The interval for 6 poses is [6.9699, 7.0299].</p>
 <p>Below shows the answer the function has computed to give us the points in which the intervals with different number of poses.</p>
-<div id="bcf8969f" class="cell" data-execution_count="7">
+<div id="2ca9c0e4" class="cell" data-execution_count="7">
 <div class="cell-output cell-output-stdout">
 <pre><code>0
 3.7199999999999647
