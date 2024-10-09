@@ -2,6 +2,10 @@
 title: "Reality Check 1, Stewart Platform in 2 Dimensions"
 author: "Jenaveve White"
 format: html
+execute:
+
+  echo: false
+
 ---
 
 ## Reality Check
@@ -45,10 +49,12 @@ After creating this function, to ensure it is finding the roots correctly my cod
 
 # Question 2
 
+Plot f(θ) on [−π, π]. As a check of your work, there should be roots at θ = ±π/4.
 
+To create this graph I used my created f() function to plot an array of 400 points on the interval [−π, π].
 
-```{python, echo= False, results='hide'}
-
+As seen below, my function is working properly, as roots can seen at θ = ±π/4. 
+```{python}
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -104,7 +110,13 @@ plt.show()
 
 # Question 3
 
-Reproduce Figure 1.15.
+For question 3 we are asked to Reproduce Figure 1.15.
+
+First step in creating these graphics was to create a triangle function that plots the points, struts, and triangle lines. 
+The parameters of this function take in 6 point. First the three points on the triangle, then the three fixed nodes for the 
+struts. After creating this function, I called it twice and passed in the appropriate points to replicate the figures. 
+
+My two triangle figures properly replicate those shown in figure 1.15 and plotted red triangles with the correct verticies, placed small blue circles at the strut anchor points, and plotted the struts. 
 
 ```{python, echo=false}
 
@@ -150,9 +162,13 @@ plot_triangle((2,1),(1,2),(3,2), 4,4,0)
 ```
 
 
-# Question 4 
+# Question 4a.
 
 Solve the forward kinematics problem for the planar Stewart platform specified by x1 = 5,(x2, y2) = (0, 6), L1 = L3 = 3, L2 = 3√2, γ = π/4, p1 = p2 = 5, p3 = 3. Begin by plotting f(θ). Use an equation solver of your choice to find all four poses (roots of   f(θ)), and plot them. Check your answers by verifying that p1, p2, p3 are the lengths of the struts in your plot.
+
+My approach for this question was to use the secant method to solve for the root. This code was provided to us on our canvas page under the python functions. 
+
+The resulting thetas for the 4 distinct poses were -0.721, .0.331, 1.144, and 2.116
 
 ```{python, echo=false}
 
@@ -189,6 +205,14 @@ plt.plot(x_array, f(x_array))
 plt.grid()
 plt.show()
 
+def secant(f, x0, x1, k):
+    for i in range(1,k):
+        x2 = x1 - f(x1)*(x1-x0)/(f(x1)-f(x0))
+        x0 =x1 
+        x1 = x2
+    return x2
+
+
 #def rootfinder(start, stop, num):
 #    initial_guesses = np.linspace(start, stop, num)  # Multiple guesses for better coverage
 #    roots = []
@@ -210,7 +234,16 @@ plt.show()
 
 ```
 
-```{python, , echo=false}
+# Question 4b. 
+
+For part 4b the four poses should be graphed. 
+
+For solving this question I created a function to graph the poses based on a value theta.
+I created a function which takes in theta and uses the formulas from the f function previously descibed, to plot the plots of the triangle and the struts with their fixed nodes.
+
+Upon viewing these graphs, you can see that the proper theta values have been found, and that the graphs are producing the 
+appropriate images.
+```{python}
 import numpy as np 
 import matplotlib.pyplot as plt 
 
@@ -270,7 +303,7 @@ def triangleplotting(theta):
 
     #plots strut 3
     plt.plot([x2, u3],[y2, m3])
-
+    plt.title('Theta at '+ str(theta))
 
 #tested Triangle plot
 #triangleplotting( np.pi /4)
@@ -286,7 +319,7 @@ def secant(f, x0, x1, k):
 plt.figure()
 firsttheta = secant(f, -1, -0.6, 10)
 triangleplotting(firsttheta)
-print(firsttheta)
+#print(firsttheta)
 
 plt.figure()
 secondtheta = secant(f, -.4, -.3, 5)
@@ -306,6 +339,12 @@ triangleplotting(fourththeta)
 # Question 5 
 Change strut length to p2 = 7 and re-solve the problem. For these parameters, there are six poses
 
+To approach this problem, I changed the global variable p2 to be set to 7.
+After doing so, I created the function plot with 400 points on the interval negative pi to pi. 
+The six poses are related to the theta value found from the roots. These values are shown when the poses are graphed.
+
+Along with the correct function graphed, there are the 6 unique poses and their theta values as the graph titles. 
+The solution to this problem has been clearly shown through the following graphs.
 ```{python, echo=false}
 
 p2 = 7
@@ -340,6 +379,11 @@ triangleplotting(g6)
 # Question 6 
 Find a strut length p2, with the rest of the parameters as in Step 4, for which there are only two poses.
 
+For this question, I used a guess and check method. I found that for 2 poses, a strut length of 4 outputs the
+correct number of roots. After finding the correct p2 length, I ploted the theta function similarly to my past graphs. 
+Along with the function, I have created two graphs that show the poses at the 2 thetas. 
+
+I believe that this properly displays a found strut length for which there are only two poses. 
 ```{python, echo=false}
 p2 = 4
 
@@ -349,8 +393,8 @@ plt.grid()
 plt.show()
 
 g1 = secant(f,1,1.5, 5)
-print(g1)
-print(g2)
+#print(g1)
+#print(g2)
 g2 = secant(f, 1.5, 2, 5)
 
 plt.figure()
@@ -363,6 +407,14 @@ triangleplotting(g2)
 # Question 7 
 Calculate the intervals in p2, with the rest of the parameters as in Step 4, for which there are 0, 2, 4, and 6 poses, respectively
 
+To calculate the intervals for which there are 0,2,4, and 6 roots, I created a function that displays when value of our function f
+based on iterating through p2 lengths from 0 to 10 with a step of 0.01. From this function we can find where the zeros change from 0 zeros, to 
+2 zeroes, to 4 zeroes, to 6 zeroes, and then back down. 
+
+The results of this function shows that the intervals for 0 zeroes are [0,3.7199] and [9.2699, $\infty$]. The interval for 2 roots is [3.7199,4.8699] and [7.8499,9.2699]. 
+The interval for 4 poses are [4.8699, 6.9699] and [7.0299, 7.8499]. The interval for 6 poses is [6.9699, 7.0299].
+
+Below shows the answer the function has computed to give us the points in which the intervals with different number of poses. 
 ```{python, echo=false}
 
 p2 = 0
@@ -370,7 +422,7 @@ p2_f = 10
 d_p2 =  0.01
 
 # Creating an interval to define where there are exactly 4 roots in our f function. 
-
+print('0')
 Theta = np.linspace(-np.pi, np.pi, 1000)
 zeros_prev= 0 
 while p2< p2_f:
@@ -386,5 +438,7 @@ while p2< p2_f:
    
     zeros_prev = zeros 
     p2 += d_p2
+
+print('0')
 
 ```

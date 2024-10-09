@@ -21,40 +21,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -140,59 +106,33 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>A Stewart platform is a versatile parallel manipulator characterized by six degrees of freedom, allowing for precise control of a mobile platform connected to a fixed base via six adjustable legs. Developed by Eric G. Stewart in the 1960s, these platforms can move freely in three-dimensional space, making them ideal for various applications, including robotics, flight simulators, medical devices, and aerospace testing. Their advantages include high precision, versatility in motion profiles, and a compact design, which enable them to effectively accommodate diverse payloads and operational requirements. Overall, Stewart platforms play a crucial role in advancing technology across multiple fields by providing sophisticated motion control solutions.</p>
 </section>
-<section id="question-1-and-2" class="level1">
-<h1>Question 1 and 2</h1>
+<section id="question-1" class="level1">
+<h1>Question 1</h1>
 <p>Write a Python function for f(θ). The parameters <span class="math inline">\(L_1, L_2, L_3, \gamma, x_1, x_2, y_2 \text{ are fixed}\)</span> constants, and the strut lengths p1, p2, p3 will be known for a given pose.</p>
-<div id="018e6a16" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>L1 <span class="op">=</span> <span class="dv">2</span> </span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>L2 <span class="op">=</span> np.sqrt(<span class="dv">2</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>L3 <span class="op">=</span> np.sqrt(<span class="dv">2</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>gamma <span class="op">=</span> np.pi <span class="op">/</span><span class="dv">2</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>x1 <span class="op">=</span> <span class="dv">4</span> </span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>x2 <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>y2 <span class="op">=</span> <span class="dv">4</span> </span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>p1 <span class="op">=</span> np.sqrt(<span class="dv">5</span>)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>p2 <span class="op">=</span> p1</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>p3 <span class="op">=</span> p1</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Question 1 </span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(theta):</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    A2 <span class="op">=</span> L3<span class="op">*</span>np.cos(theta)<span class="op">-</span>x1 </span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    B2<span class="op">=</span> L3<span class="op">*</span>np.sin(theta)</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    A3 <span class="op">=</span> L2<span class="op">*</span>np.cos(theta <span class="op">+</span> gamma) <span class="op">-</span> x2</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    B3 <span class="op">=</span> L2<span class="op">*</span>np.sin(theta<span class="op">+</span> gamma) <span class="op">-</span>y2</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    D <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> (A2<span class="op">*</span> B3 <span class="op">-</span> B2<span class="op">*</span>A3)</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    N1 <span class="op">=</span> B3<span class="op">*</span>(p2<span class="op">**</span><span class="dv">2</span><span class="op">-</span>p1<span class="op">**</span><span class="dv">2</span><span class="op">-</span>A2<span class="op">**</span><span class="dv">2</span><span class="op">-</span>B2<span class="op">**</span><span class="dv">2</span>)<span class="op">-</span>B2<span class="op">*</span>(p3<span class="op">**</span><span class="dv">2</span><span class="op">-</span>p1<span class="op">**</span><span class="dv">2</span><span class="op">-</span>A3<span class="op">**</span><span class="dv">2</span><span class="op">-</span>B3<span class="op">**</span><span class="dv">2</span>)</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    N2 <span class="op">=</span> <span class="op">-</span>A3<span class="op">*</span>(p2<span class="op">**</span><span class="dv">2</span><span class="op">-</span>p1<span class="op">**</span><span class="dv">2</span><span class="op">-</span>A2<span class="op">**</span><span class="dv">2</span><span class="op">-</span>B2<span class="op">**</span><span class="dv">2</span>)<span class="op">+</span>A2<span class="op">*</span>(p3<span class="op">**</span><span class="dv">2</span><span class="op">-</span>p1<span class="op">**</span><span class="dv">2</span><span class="op">-</span>A3<span class="op">**</span><span class="dv">2</span><span class="op">-</span>B3<span class="op">**</span><span class="dv">2</span>)</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> N1<span class="op">**</span><span class="dv">2</span><span class="op">+</span>N2<span class="op">**</span><span class="dv">2</span><span class="op">-</span>p1<span class="op">**</span><span class="dv">2</span><span class="op">*</span>D<span class="op">**</span><span class="dv">2</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>theta <span class="op">=</span> np.pi<span class="op">/</span><span class="dv">4</span> </span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>x_array <span class="op">=</span> np.linspace(<span class="op">-</span>np.pi, np.pi,<span class="dv">400</span>)</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>plt.plot(x_array, f(x_array))</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="co">#def triangle(p1, p2, gamma, theta):</span></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="co">#    A2 = L3*np.cos(theta)-x1 </span></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="co">#    B2= L3*np.sin(theta)</span></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="co">#    A3 = L2*np.cos(theta + gamma) - x2</span></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="co">#    B3 = L2*np.sin(theta+ gamma) -y2</span></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="co">#    D = 2 * (A2* B3 - B2*A3)</span></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="co">#    N1 = B3*(p2**2-p1**2-A2**2-B2)-B2*(p3**2-p1**2-A3**2-B3**2)</span></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="co">#    N2 = -A3*(p2**2-p1**2-A2**2-B2)+A2*(p3**2-p1**2-A3**2-B3**2)</span></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="co">#    x = N1 / D</span></span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="co">#    y = N2 / D</span></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="co">#    answ = [x,y, theta]</span></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="co">#    return answ</span></span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To write the function for f(θ) I created a function named f that takes in a parameter <span class="math inline">\(\theta\)</span> and calculates f(θ). The parameters that are fixed were set to global variables and later called inside of my f function. From our text, we have relationships for our 2 dimension stewart platform as follows: <span class="math display">\[ A_2 = L_3cos(\theta)-x1
+\]</span> <span class="math display">\[ B_2= L_3sin(\theta)
+\]</span></p>
+<p><span class="math display">\[    A_3 = L_2cos(\theta + \gamma) - x_2
+\]</span></p>
+<p><span class="math display">\[
+    B_3 = L_2sin(\theta+ \gamma) -y_2
+\]</span></p>
+<p><span class="math display">\[ D = 2(A_2B_3 - B_2A_3)
+\]</span> <span class="math display">\[
+    N_1 = B_3(p_2^2-p_1^2-A_2^2-B_2^2)-B_2  
+    (p_3^2-p_1^2-A_3^2-B_3^2)
+\]</span> <span class="math display">\[
+    N_2 = -A_3(p_2^2-p_1^2-A_2^2-B_2^2)+A_2(p_3^2-p_1^2-A_3^2-B_3^2)
+\]</span></p>
+<p>Using these equations, the function calculates <span class="math inline">\(N_1^2+N_2^2-p_1^2D^2\)</span>, which should output 0, if working correctly.</p>
+<p>After creating this function, to ensure it is finding the roots correctly my code returned a value of .0000000000004, which for our purposes is essentially zero. This tells us that the function is working properly. The miniscule value is likely due to a computational rounding error, which is fairly insignificant.</p>
+</section>
+<section id="question-2" class="level1">
+<h1>Question 2</h1>
+<p>Plot f(θ) on [−π, π]. As a check of your work, there should be roots at θ = ±π/4.</p>
+<p>To create this graph I used my created f() function to plot an array of 400 points on the interval [−π, π].</p>
+<p>As seen below, my function is working properly, as roots can seen at θ = ±π/4.</p>
+<div id="86c747e9" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -204,46 +144,10 @@ window.Quarto = {
 </section>
 <section id="question-3" class="level1">
 <h1>Question 3</h1>
-<p>Reproduce Figure 1.15.</p>
-<div id="8c8d5385" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_triangle(point1, point2, point3, x1, x2 , y2):</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Prepare x and y coordinates</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> [point1[<span class="dv">0</span>], point2[<span class="dv">0</span>], point3[<span class="dv">0</span>], point1[<span class="dv">0</span>]]  <span class="co"># Closing the triangle</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> [point1[<span class="dv">1</span>], point2[<span class="dv">1</span>], point3[<span class="dv">1</span>], point1[<span class="dv">1</span>]]  <span class="co"># Closing the triangle</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    strut1x <span class="op">=</span> [<span class="dv">0</span>, point1[<span class="dv">0</span>]]</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    strut1y<span class="op">=</span> [<span class="dv">0</span>, point1[<span class="dv">1</span>]]</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    strut2x <span class="op">=</span> [<span class="dv">0</span>, point2[<span class="dv">0</span>]]</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    strut2y <span class="op">=</span> [x1,point2[<span class="dv">1</span>]]</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    strut3x <span class="op">=</span> [x2, point3[<span class="dv">0</span>]]</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    strut3y <span class="op">=</span> [y2, point3[<span class="dv">1</span>]]</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create the plot</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    plt.figure()</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    plt.plot(x, y, linestyle<span class="op">=</span><span class="st">'-'</span>, color<span class="op">=</span><span class="st">'red'</span>)  </span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    plt.plot(strut1x, strut1y, linestyle<span class="op">=</span><span class="st">'-'</span>, color<span class="op">=</span><span class="st">'red'</span>) </span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    plt.plot(strut2x, strut2y, linestyle<span class="op">=</span><span class="st">'-'</span>, color<span class="op">=</span><span class="st">'red'</span>)  </span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    plt.plot(strut3x, strut3y, linestyle<span class="op">=</span><span class="st">'-'</span>, color<span class="op">=</span><span class="st">'red'</span>)  </span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatter with small open circles</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    plt.scatter(x, y, marker<span class="op">=</span><span class="st">'o'</span>, edgecolor<span class="op">=</span><span class="st">'blue'</span>, s<span class="op">=</span><span class="dv">50</span>)</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    plt.scatter(strut1x, strut1y, marker<span class="op">=</span><span class="st">'o'</span>, edgecolor<span class="op">=</span><span class="st">'blue'</span>, s<span class="op">=</span><span class="dv">50</span> )</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    plt.scatter(strut2x, strut2y, marker<span class="op">=</span><span class="st">'o'</span>, edgecolor<span class="op">=</span><span class="st">'blue'</span>, s<span class="op">=</span><span class="dv">50</span> )</span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    plt.scatter(strut3x, strut3y, marker<span class="op">=</span><span class="st">'o'</span>, edgecolor<span class="op">=</span><span class="st">'blue'</span>, s<span class="op">=</span><span class="dv">50</span> )</span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Set aspect ratio and limits</span></span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    plt.axis(<span class="st">'equal'</span>)</span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    plt.grid()</span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="co">#testing my triangle function</span></span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>plot_triangle((<span class="dv">1</span>,<span class="dv">2</span>),(<span class="dv">2</span>,<span class="dv">3</span>),(<span class="dv">2</span>,<span class="dv">1</span>), <span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">0</span>)</span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>plot_triangle((<span class="dv">2</span>,<span class="dv">1</span>),(<span class="dv">1</span>,<span class="dv">2</span>),(<span class="dv">3</span>,<span class="dv">2</span>), <span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>For question 3 we are asked to Reproduce Figure 1.15.</p>
+<p>First step in creating these graphics was to create a triangle function that plots the points, struts, and triangle lines. The parameters of this function take in 6 point. First the three points on the triangle, then the three fixed nodes for the struts. After creating this function, I called it twice and passed in the appropriate points to replicate the figures.</p>
+<p>My two triangle figures properly replicate those shown in figure 1.15 and plotted red triangles with the correct verticies, placed small blue circles at the strut anchor points, and plotted the struts.</p>
+<div id="b7d0d2ea" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -260,61 +164,12 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="question-4" class="level1">
-<h1>Question 4</h1>
+<section id="question-4a." class="level1">
+<h1>Question 4a.</h1>
 <p>Solve the forward kinematics problem for the planar Stewart platform specified by x1 = 5,(x2, y2) = (0, 6), L1 = L3 = 3, L2 = 3√2, γ = π/4, p1 = p2 = 5, p3 = 3. Begin by plotting f(θ). Use an equation solver of your choice to find all four poses (roots of f(θ)), and plot them. Check your answers by verifying that p1, p2, p3 are the lengths of the struts in your plot.</p>
-<div id="44e825a6" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> fsolve</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly_express <span class="im">as</span> px</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>L1 <span class="op">=</span> <span class="dv">3</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>L2 <span class="op">=</span> <span class="dv">3</span> <span class="op">*</span> np.sqrt(<span class="dv">2</span>)</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>L3 <span class="op">=</span> <span class="dv">3</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>gamma <span class="op">=</span> np.pi <span class="op">/</span><span class="dv">4</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>x1 <span class="op">=</span> <span class="dv">5</span> </span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>x2 <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>y2 <span class="op">=</span> <span class="dv">6</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>p1 <span class="op">=</span> <span class="dv">5</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>p2 <span class="op">=</span> <span class="dv">5</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>p3 <span class="op">=</span> <span class="dv">3</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the function f(θ) from earlier</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(theta):</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    A2 <span class="op">=</span> L3 <span class="op">*</span> np.cos(theta) <span class="op">-</span> x1 </span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    B2 <span class="op">=</span> L3 <span class="op">*</span> np.sin(theta)</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    A3 <span class="op">=</span> L2 <span class="op">*</span> np.cos(theta <span class="op">+</span> gamma) <span class="op">-</span> x2</span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    B3 <span class="op">=</span> L2 <span class="op">*</span> np.sin(theta <span class="op">+</span> gamma) <span class="op">-</span> y2</span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    D <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> (A2 <span class="op">*</span> B3 <span class="op">-</span> B2 <span class="op">*</span> A3)</span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    N1 <span class="op">=</span> B3 <span class="op">*</span> (p2<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> p1<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> A2<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> B2<span class="op">**</span><span class="dv">2</span>) <span class="op">-</span> B2 <span class="op">*</span> (p3<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> p1<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> A3<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> B3<span class="op">**</span><span class="dv">2</span>)</span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    N2 <span class="op">=</span> <span class="op">-</span>A3 <span class="op">*</span> (p2<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> p1<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> A2<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> B2<span class="op">**</span><span class="dv">2</span>) <span class="op">+</span> A2 <span class="op">*</span> (p3<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> p1<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> A3<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> B3<span class="op">**</span><span class="dv">2</span>)</span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> N1<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> N2<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> p1<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> D<span class="op">**</span><span class="dv">2</span></span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>x_array <span class="op">=</span> np.linspace(<span class="op">-</span>np.pi, np.pi,<span class="dv">400</span>)</span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>plt.plot(x_array, f(x_array))</span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="co">#def rootfinder(start, stop, num):</span></span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="co">#    initial_guesses = np.linspace(start, stop, num)  # Multiple guesses for better coverage</span></span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a><span class="co">#    roots = []</span></span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a><span class="co">#    for i in initial_guesses:</span></span>
-<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a><span class="co">#        root = fsolve(f, i)</span></span>
-<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a><span class="co">#        # Add unique roots only</span></span>
-<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a><span class="co">#        if root not in roots :</span></span>
-<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a><span class="co">#            roots.append(root)</span></span>
-<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a><span class="co">#    roots = np.array(roots).flatten()</span></span>
-<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a><span class="co">#    print("Roots found:", roots)</span></span>
-<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a><span class="co">#    # Convert roots to a more usable format</span></span>
-<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a><span class="co">#    return roots</span></span>
-<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a><span class="co">## Print the roots</span></span>
-<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a><span class="co">#rootfinder(-np.pi, np.pi, 5)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>My approach for this question was to use the secant method to solve for the root. This code was provided to us on our canvas page under the python functions.</p>
+<p>The resulting thetas for the 4 distinct poses were -0.721, .0.331, 1.144, and 2.116</p>
+<div id="d6219bd2" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -323,124 +178,38 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="8118d78c" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np </span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>L1 <span class="op">=</span> <span class="dv">3</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>L2 <span class="op">=</span> <span class="dv">3</span> <span class="op">*</span> np.sqrt(<span class="dv">2</span>)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>L3 <span class="op">=</span> <span class="dv">3</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>gamma <span class="op">=</span> np.pi <span class="op">/</span> <span class="dv">4</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>x1 <span class="op">=</span> <span class="dv">5</span> </span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>x2 <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>y2 <span class="op">=</span> <span class="dv">6</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>p1 <span class="op">=</span> <span class="dv">5</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>p2 <span class="op">=</span> <span class="dv">5</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>p3 <span class="op">=</span> <span class="dv">3</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the function f(θ) from earlier</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(theta):</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    A2 <span class="op">=</span> L3 <span class="op">*</span> np.cos(theta) <span class="op">-</span> x1 </span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    B2 <span class="op">=</span> L3 <span class="op">*</span> np.sin(theta)</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    A3 <span class="op">=</span> L2 <span class="op">*</span> np.cos(theta <span class="op">+</span> gamma) <span class="op">-</span> x2</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    B3 <span class="op">=</span> L2 <span class="op">*</span> np.sin(theta <span class="op">+</span> gamma) <span class="op">-</span> y2</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    D <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> (A2 <span class="op">*</span> B3 <span class="op">-</span> B2 <span class="op">*</span> A3)</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    N1 <span class="op">=</span> B3 <span class="op">*</span> (p2<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> p1<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> A2<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> B2<span class="op">**</span><span class="dv">2</span>) <span class="op">-</span> B2 <span class="op">*</span> (p3<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> p1<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> A3<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> B3<span class="op">**</span><span class="dv">2</span>)</span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    N2 <span class="op">=</span> <span class="op">-</span>A3 <span class="op">*</span> (p2<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> p1<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> A2<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> B2<span class="op">**</span><span class="dv">2</span>) <span class="op">+</span> A2 <span class="op">*</span> (p3<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> p1<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> A3<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> B3<span class="op">**</span><span class="dv">2</span>)</span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> N1<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> N2<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> p1<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> D<span class="op">**</span><span class="dv">2</span></span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> triangleplotting(theta):</span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    A2 <span class="op">=</span> L3<span class="op">*</span>np.cos(theta)<span class="op">-</span>x1 </span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>    B2<span class="op">=</span> L3<span class="op">*</span>np.sin(theta)</span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    A3 <span class="op">=</span> L2<span class="op">*</span>np.cos(theta <span class="op">+</span> gamma) <span class="op">-</span> x2</span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    B3 <span class="op">=</span> L2<span class="op">*</span>np.sin(theta<span class="op">+</span> gamma) <span class="op">-</span>y2</span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>    D <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> (A2<span class="op">*</span> B3 <span class="op">-</span> B2<span class="op">*</span>A3)</span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>    N1 <span class="op">=</span> B3<span class="op">*</span>(p2<span class="op">**</span><span class="dv">2</span><span class="op">-</span>p1<span class="op">**</span><span class="dv">2</span><span class="op">-</span>A2<span class="op">**</span><span class="dv">2</span><span class="op">-</span>B2<span class="op">**</span><span class="dv">2</span>)<span class="op">-</span>B2<span class="op">*</span>(p3<span class="op">**</span><span class="dv">2</span><span class="op">-</span>p1<span class="op">**</span><span class="dv">2</span><span class="op">-</span>A3<span class="op">**</span><span class="dv">2</span><span class="op">-</span>B3<span class="op">**</span><span class="dv">2</span>)</span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>    N2 <span class="op">=</span> <span class="op">-</span>A3<span class="op">*</span>(p2<span class="op">**</span><span class="dv">2</span><span class="op">-</span>p1<span class="op">**</span><span class="dv">2</span><span class="op">-</span>A2<span class="op">**</span><span class="dv">2</span><span class="op">-</span>B2<span class="op">**</span><span class="dv">2</span>)<span class="op">+</span>A2<span class="op">*</span>(p3<span class="op">**</span><span class="dv">2</span><span class="op">-</span>p1<span class="op">**</span><span class="dv">2</span><span class="op">-</span>A3<span class="op">**</span><span class="dv">2</span><span class="op">-</span>B3<span class="op">**</span><span class="dv">2</span>)</span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> N1<span class="op">/</span>D</span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> N2<span class="op">/</span>D</span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>    <span class="co">#coordinate points for the triangle </span></span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>    u1 <span class="op">=</span> N1<span class="op">/</span>D</span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>    u2 <span class="op">=</span> x <span class="op">+</span> L3 <span class="op">*</span> np.cos(theta)</span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>    u3 <span class="op">=</span> x <span class="op">+</span> L2 <span class="op">*</span> np.cos(theta <span class="op">+</span> gamma)</span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>    m1 <span class="op">=</span> N2<span class="op">/</span>D</span>
-<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>    m2 <span class="op">=</span> y <span class="op">+</span> L3 <span class="op">*</span> np.sin(theta)</span>
-<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>    m3 <span class="op">=</span> y <span class="op">+</span> L2 <span class="op">*</span> np.sin(gamma <span class="op">+</span> theta)</span>
-<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>    plt.grid()</span>
-<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>    plt.autoscale()</span>
-<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>    <span class="co">#plots the inner triangle.</span></span>
-<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>    plt.plot([x,u3, x <span class="op">+</span> L3 <span class="op">*</span> np.cos(theta),x ],[y, y <span class="op">+</span> L2 <span class="op">*</span> np.sin(gamma <span class="op">+</span> theta), y <span class="op">+</span> L3 <span class="op">*</span> np.sin(theta),y ])</span>
-<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>    <span class="co">#plots strut 1</span></span>
-<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>    plt.plot([<span class="dv">0</span>, x],[<span class="dv">0</span>, y])</span>
-<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>    <span class="co">#plots strut 2</span></span>
-<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>    plt.plot([x1,u2 ],[<span class="dv">0</span>, m2])</span>
-<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>    <span class="co">#plots strut 3</span></span>
-<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>    plt.plot([x2, u3],[y2, m3])</span>
-<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a><span class="co">#tested Triangle plot</span></span>
-<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a><span class="co">#triangleplotting( np.pi /4)</span></span>
-<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> secant(f, x0, x1, k):</span>
-<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,k):</span>
-<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>        x2 <span class="op">=</span> x1 <span class="op">-</span> f(x1)<span class="op">*</span>(x1<span class="op">-</span>x0)<span class="op">/</span>(f(x1)<span class="op">-</span>f(x0))</span>
-<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a>        x0 <span class="op">=</span>x1 </span>
-<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a>        x1 <span class="op">=</span> x2</span>
-<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x2</span>
-<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a><span class="co">#fig,axes = plt.subplots(2,2, figsize = 10)</span></span>
-<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
-<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>firsttheta <span class="op">=</span> secant(f, <span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="fl">0.6</span>, <span class="dv">10</span>)</span>
-<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a>triangleplotting(firsttheta)</span>
-<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(firsttheta)</span>
-<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
-<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a>secondtheta <span class="op">=</span> secant(f, <span class="op">-</span><span class="fl">.4</span>, <span class="op">-</span><span class="fl">.3</span>, <span class="dv">5</span>)</span>
-<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a><span class="co">#print(secondtheta)</span></span>
-<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a>triangleplotting(secondtheta)</span>
-<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
-<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a>thirdtheta <span class="op">=</span> secant(f, <span class="dv">1</span>, <span class="fl">1.2</span>, <span class="dv">5</span>)</span>
-<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a>triangleplotting(thirdtheta)</span>
-<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
-<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a>fourththeta <span class="op">=</span> secant(f, <span class="dv">2</span>, <span class="fl">2.2</span>, <span class="dv">5</span>)</span>
-<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a>triangleplotting(fourththeta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>-0.7208492044603896</code></pre>
-</div>
+</section>
+<section id="question-4b." class="level1">
+<h1>Question 4b.</h1>
+<p>For part 4b the four poses should be graphed.</p>
+<p>For solving this question I created a function to graph the poses based on a value theta. I created a function which takes in theta and uses the formulas from the f function previously descibed, to plot the plots of the triangle and the struts with their fixed nodes.</p>
+<p>Upon viewing these graphs, you can see that the proper theta values have been found, and that the graphs are producing the appropriate images.</p>
+<div id="cb87d58e" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="realityc1_files/figure-html/cell-5-output-2.png" width="558" height="411" class="figure-img"></p>
+<p><img src="realityc1_files/figure-html/cell-5-output-1.png" width="558" height="431" class="figure-img"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="realityc1_files/figure-html/cell-5-output-3.png" width="558" height="411" class="figure-img"></p>
+<p><img src="realityc1_files/figure-html/cell-5-output-2.png" width="558" height="431" class="figure-img"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="realityc1_files/figure-html/cell-5-output-4.png" width="561" height="411" class="figure-img"></p>
+<p><img src="realityc1_files/figure-html/cell-5-output-3.png" width="561" height="431" class="figure-img"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="realityc1_files/figure-html/cell-5-output-5.png" width="558" height="411" class="figure-img"></p>
+<p><img src="realityc1_files/figure-html/cell-5-output-4.png" width="558" height="431" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -449,33 +218,9 @@ window.Quarto = {
 <section id="question-5" class="level1">
 <h1>Question 5</h1>
 <p>Change strut length to p2 = 7 and re-solve the problem. For these parameters, there are six poses</p>
-<div id="67cfdb67" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>p2 <span class="op">=</span> <span class="dv">7</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>x_array <span class="op">=</span> np.linspace(<span class="op">-</span>np.pi, np.pi,<span class="dv">400</span>)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>plt.plot(x_array, f(x_array))</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>g1 <span class="op">=</span> secant(f,<span class="op">-</span><span class="fl">.7</span>, <span class="op">-</span><span class="fl">.6</span>, <span class="dv">3</span>)</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>g2 <span class="op">=</span> secant(f,<span class="op">-</span><span class="fl">.4</span>, <span class="op">-</span><span class="fl">.3</span>, <span class="dv">3</span>)</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>g3 <span class="op">=</span> secant(f,<span class="dv">0</span>, <span class="fl">.1</span>, <span class="dv">3</span>)</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>g4 <span class="op">=</span> secant(f,<span class="fl">.2</span>, <span class="fl">.5</span>, <span class="dv">3</span>)</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>g5 <span class="op">=</span> secant(f,<span class="fl">.9</span>, <span class="fl">1.1</span>, <span class="dv">3</span>)</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>g6 <span class="op">=</span> secant(f,<span class="fl">2.3</span>, <span class="fl">2.6</span>, <span class="dv">3</span>)</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>triangleplotting(g1)</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>triangleplotting(g2)</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>triangleplotting(g3)</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>triangleplotting(g4)</span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>triangleplotting(g5)</span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>triangleplotting(g6)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To approach this problem, I changed the global variable p2 to be set to 7. After doing so, I created the function plot with 400 points on the interval negative pi to pi. The six poses are related to the theta value found from the roots. These values are shown when the poses are graphed.</p>
+<p>Along with the correct function graphed, there are the 6 unique poses and their theta values as the graph titles. The solution to this problem has been clearly shown through the following graphs.</p>
+<div id="1f3e3367" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -486,42 +231,42 @@ window.Quarto = {
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="realityc1_files/figure-html/cell-6-output-2.png" width="558" height="411" class="figure-img"></p>
+<p><img src="realityc1_files/figure-html/cell-6-output-2.png" width="558" height="431" class="figure-img"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="realityc1_files/figure-html/cell-6-output-3.png" width="558" height="411" class="figure-img"></p>
+<p><img src="realityc1_files/figure-html/cell-6-output-3.png" width="558" height="431" class="figure-img"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="realityc1_files/figure-html/cell-6-output-4.png" width="558" height="411" class="figure-img"></p>
+<p><img src="realityc1_files/figure-html/cell-6-output-4.png" width="558" height="431" class="figure-img"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="realityc1_files/figure-html/cell-6-output-5.png" width="558" height="411" class="figure-img"></p>
+<p><img src="realityc1_files/figure-html/cell-6-output-5.png" width="558" height="431" class="figure-img"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="realityc1_files/figure-html/cell-6-output-6.png" width="558" height="411" class="figure-img"></p>
+<p><img src="realityc1_files/figure-html/cell-6-output-6.png" width="558" height="431" class="figure-img"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="realityc1_files/figure-html/cell-6-output-7.png" width="558" height="411" class="figure-img"></p>
+<p><img src="realityc1_files/figure-html/cell-6-output-7.png" width="558" height="431" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -530,17 +275,27 @@ window.Quarto = {
 <section id="question-6" class="level1">
 <h1>Question 6</h1>
 <p>Find a strut length p2, with the rest of the parameters as in Step 4, for which there are only two poses.</p>
-<div id="0474de2c" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>p2 <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>x_array <span class="op">=</span> np.linspace(<span class="op">-</span>np.pi, np.pi,<span class="dv">500</span>)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>plt.plot(x_array, f(x_array))</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>plt.grid()</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>For this question, I used a guess and check method. I found that for 2 poses, a strut length of 4 outputs the correct number of roots. After finding the correct p2 length, I ploted the theta function similarly to my past graphs. Along with the function, I have created two graphs that show the poses at the 2 thetas.</p>
+<p>I believe that this properly displays a found strut length for which there are only two poses.</p>
+<div id="edf6eea3" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
 <p><img src="realityc1_files/figure-html/cell-7-output-1.png" width="600" height="411" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="realityc1_files/figure-html/cell-7-output-2.png" width="558" height="431" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="realityc1_files/figure-html/cell-7-output-3.png" width="558" height="431" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -549,6 +304,21 @@ window.Quarto = {
 <section id="question-7" class="level1">
 <h1>Question 7</h1>
 <p>Calculate the intervals in p2, with the rest of the parameters as in Step 4, for which there are 0, 2, 4, and 6 poses, respectively</p>
+<p>To calculate the intervals for which there are 0,2,4, and 6 roots, I created a function that displays when value of our function f based on iterating through p2 lengths from 0 to 10 with a step of 0.01. From this function we can find where the zeros change from 0 zeros, to 2 zeroes, to 4 zeroes, to 6 zeroes, and then back down.</p>
+<p>The results of this function shows that the intervals for 0 zeroes are [0,3.7199] and [9.2699, <span class="math inline">\(\infty\)</span>]. The interval for 2 roots is [3.7199,4.8699] and [7.8499,9.2699]. The interval for 4 poses are [4.8699, 6.9699] and [7.0299, 7.8499]. The interval for 6 poses is [6.9699, 7.0299].</p>
+<p>Below shows the answer the function has computed to give us the points in which the intervals with different number of poses.</p>
+<div id="bcf8969f" class="cell" data-execution_count="7">
+<div class="cell-output cell-output-stdout">
+<pre><code>0
+3.7199999999999647
+4.869999999999941
+6.969999999999896
+7.0299999999998946
+7.849999999999877
+9.269999999999847
+0</code></pre>
+</div>
+</div>
 </section>
 
 </main>
