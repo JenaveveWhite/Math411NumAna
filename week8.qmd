@@ -1,0 +1,213 @@
+
+---
+title: " C4-P2 "
+author: "Jenaveve White"
+date: "November 7, 2024"
+output:
+  html_document:
+    theme: spacelab
+    highlight: tango
+    css: styles.css
+  pdf_document: default
+format:
+  html:
+    code-fold: true
+    toc: true
+    toc-location: left
+    toc-depth: 2
+  pdf:
+    toc: true
+    toc-depth: 2
+
+---
+
+## Part A. 
+A company test-markets a new soft drink in 22 cities of approximately equal size. The selling
+price (in dollars) and the number sold per week in the cities are listed 
+```{python}
+
+
+import numpy as np 
+import pandas as pd
+import plotly.express as px
+import plotly.graph_objects as go
+from sympy import symbols, diff, Eq, solve
+    
+data = np.array([
+    [1, 0.59, 3980],
+    [2, 0.80, 2200],
+    [3, 0.95, 1850],
+    [4, 0.45, 6100],
+    [5, 0.79, 2100],
+    [6, 0.99, 1700],
+    [7, 0.90, 2000],
+    [8, 0.65, 4200],
+    [9, 0.79, 2440],
+    [10, 0.69, 3300],
+    [11, 0.79, 2300],
+    [12, 0.49, 6000],
+    [13, 1.09, 1190],
+    [14, 0.95, 1960],
+    [15, 0.79, 2760],
+    [16, 0.65, 4330],
+    [17, 0.45, 6960],
+    [18, 0.60, 4160],
+    [19, 0.89, 1990],
+    [20, 0.79, 2860],
+    [21, 0.99, 1920],
+    [22, 0.85, 2160]
+])
+
+#Convert data array into dataframe with labeled columns
+df = pd.DataFrame(data, columns=["City", "Price", "Sales/Week"])
+print(df)
+```
+
+Below shows a plot of the data. 
+```{python}
+# Create the scatter plot using plotly.express
+fig = px.scatter(df, x="Price", y="Sales/Week", 
+                 title="Price vs Sales per Week", 
+                 labels={"Price": "Price", "Sales/Week": "Sales per Week"})
+
+fig.show()
+
+
+```
+
+First, the company wants to find the “demand curve’’: how many it will sell at each potential price. 
+Let P denote price and S denote sales per week. Find the line S = c1 + c2P that best
+fits the data from the table in the sense of least squares. Find the normal equations and the
+coefficients c1 and c2 of the least squares line. Plot the least squares line along with the data,
+and calculate the root mean square error
+```{python}
+
+# A^TAX = A^Tb
+# A is the augmented matrix, where the first column is ones (to account for intercept)
+A = np.column_stack((np.ones(df.shape[0]), df['Price'])) 
+b = df['Sales/Week'].values 
+
+AT = A.T
+ATA = np.matmul(AT, A)
+ATb = np.matmul(AT, b)
+
+# Step 3: Solve for X (the coefficients [c1, c2])
+X = np.matmul(np.linalg.inv(ATA), ATb)
+
+# The least squares solution (c1, c2)
+c1, c2 = X
+print(f'The least squares solution is: \n c1 = {c1}, c2 = {c2}')
+
+## Root mean squared error
+predictions = c1 + c2 * df['Price']
+residuals = b - predictions
+rmse = np.sqrt(np.mean(residuals**2))
+print(f'Root Mean Square Error (RMSE) = {rmse}')
+
+```
+
+## Plot Least Squares Solution 
+```{python}
+
+m = c2
+b = c1
+
+# Create an array of x values (e.g., use the min and max of the 'Price' column)
+x_range = np.linspace(df["Price"].min(), df["Price"].max(), 100)
+
+# Calculate corresponding y values
+y_range = c2 * x_range +c1
+
+#Add line
+fig.add_trace(go.Scatter(x=x_range, y=y_range, mode='lines'))
+
+# Show the figure
+fig.show()
+
+```
+
+## Part B.
+
+After studying the results of the test marketing, the company will set a single selling price P
+throughout the country. Given a manufacturing cost of $0.23 per unit, the total profit (per city,
+per week) is S(P − 0.23) dollars. Use the results of the preceding least squares approximation
+to find the selling price for which the company’s profit will be maximized.
+
+```{python}
+# Profit = S(P − 0.23)
+# rewrite S in terms of P
+# Profit = (c1+ c2P)(P-0.23)
+# Profit = c1P + c2P^2 -0.23c1 - 0.23c2P
+# Profit = (c1 - 0.23c2)P + c2P^2 - 0.23c1
+# Take derivative with respect to P and set equal to 0 to find the max 
+# ProfitDerivative = 2c2 + (c1 - 0.23c2) = 0
+# ProfitMax = -(c1 - 0.23c2)/ 2c2 
+# Calculate the selling price that maximizes profit
+P_max = (0.23 * c2 - c1) / (2 * c2)
+
+print(f"The selling price that maximizes the profit is ${P_max:.2f}")
+
+```
+
+## Quadratic Fit Comparision 
+As you can see graphically and from our new RMSE, the quadratic fit is a better estimation for this data than the linear fit. 
+```{python}
+
+coeffs = np.polyfit(df['Price'], df['Sales/Week'], 2)  # Quadratic fit: S(P) = aP^2 + bP + c
+
+# The coefficients are returned in descending order (a, b, c)
+a, b, c = coeffs 
+
+
+y_range = a * x_range ** 2 + b * x_range + c
+
+#Add line
+fig.add_trace(go.Scatter(x=x_range, y=y_range, mode='lines'))
+
+fig.show()
+
+# Predict values using the quadratic fit: S(P) = aP^2 + bP + c
+predictions = a * df['Price']**2 + b * df['Price'] + c
+residuals = df['Sales/Week'] - predictions
+rmse = np.sqrt(np.mean(residuals**2))
+print(f'Root Mean Squared Error (RMSE) for quadratic fit = {rmse}')
+
+
+```
+
+```{python}
+
+# Profit = S(P − 0.23)
+# Rewrite S in terms of P: S(P) = aP^2 + bP + c
+# Profit = (aP^2 + bP + c)(P - 0.23)
+# Profit = aP^3 + bP^2 + cP - 0.23aP^2 - 0.23bP - 0.23c
+# Profit = aP^3 + (b - 0.23a)P^2 + (c - 0.23b)P - 0.23c
+# Take derivative with respect to P and set equal to 0 to find the max
+# ProfitDerivative = 3aP^2 + 2(b - 0.23a)P + (c - 0.23b) = 0
+# Solve for P by setting ProfitDerivative = 0 (solve the quadratic equation
+# Fit the quadratic model (degree 2 polynomial)
+coeffs = np.polyfit(df['Price'], df['Sales/Week'], 2)
+
+# The coefficients are returned in descending order (a, b, c)
+a, b, c = coeffs
+
+# Define the profit function
+def profit(P):
+    sales = a * P**2 + b * P + c
+    return sales * (P - 0.23) 
+
+# Take the derivative of the profit function and set it to zero to find the optimal price
+P = symbols('P')
+profit_expr = (a * P**2 + b * P + c) * (P - 0.23)
+
+# Derivative of the profit expression
+profit_derivative = diff(profit_expr, P)
+
+# Solve the derivative for P = 0
+optimal_price = solve(Eq(profit_derivative, 0), P)
+
+# Display the optimal price
+optimal_price = optimal_price[0]  
+print(f"The optimal selling price for maximum profit using quadratic fit is ${optimal_price:.2f}")
+
+```
