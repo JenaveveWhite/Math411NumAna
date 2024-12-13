@@ -1,0 +1,38 @@
+
+```{python}
+import pandas as pd
+import numpy as np
+import matplotlib as mlt 
+import plotly.express as px
+```
+
+# Find the least squares trigonometric approximating functions of orders 4, 6, and 8 for the following data points
+c.
+d.
+
+```{python}
+Ab = np.array([[0, 1/8,2/8,3/8,4/8,5/8,6/8,7/8],[1,2,3,1,-1,-1,-3,0]])
+
+Aa = Ab.T
+
+Ad = np.array([[0, 1/8,2/8,3/8,4/8,5/8,6/8,7/8],[4.2,5,3.8,1.6,-2.0,-1.4,0,1]])
+
+Ac = Ad.T
+
+```
+
+# Plot 
+
+```{python}
+
+df_Aa = pd.DataFrame(Aa.T, columns=["X", "Y_Aa"])
+df_Ad = pd.DataFrame(Ac.T, columns=["X", "Y_Ad"])
+
+# Plot using Plotly Express
+fig = px.scatter(df_Aa, x="X", y="Y_Aa", labels={"X": "X-axis", "Y_Aa": "Y values of Aa"}, title="Scatter Plot of Aa vs. X")
+
+fig.add_scatter(x=df_Ad["X"], y=df_Ad["Y_Ad"], mode='markers', name="Ad", marker=dict(color="red"))
+
+fig.show()
+
+```

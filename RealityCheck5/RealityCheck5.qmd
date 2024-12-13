@@ -2,11 +2,10 @@
 title: "Motion Control in Computer-Aided Modeling"
 subtitle:  "Reality Check 5"
 author: "Jenaveve White"
-format: html
+format: pdf
 execute:
 
   echo: false
-
 ---
 
 # Reality Check
